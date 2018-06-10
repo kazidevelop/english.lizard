@@ -1,0 +1,54 @@
+<div class="question-viewer-content" *ngIf="state!== 'finished'">
+  <h1 class="question-set">{{questionSet.heading}}</h1>
+  {{question| json}} - {{state}}
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="question">{{question.text}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-radio-group class="question-radio-group" [(ngModel)]="selectedChoice">
+        <mat-radio-button class="question-radio-button" (click)="selectChoice()" *ngFor="let choice of question.choices" [value]="choice">
+          {{choice}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="question-result-pane" [ngClass]="barStyle">
+    <mat-card-content>
+      <div [ngSwitch]="state">
+        <button *ngSwitchCase="'unanswered'" mat-raised-button disabled=true>Check</button>
+        <button *ngSwitchCase="'answered'" mat-raised-button class="bar-button-correct" (click)="check()">Check</button>
+        <ng-container *ngSwitchCase="'checked'">
+          <span *ngIf="isLast; then closeBlock else nextBlock"></span>
+          <ng-template #closeBlock>
+            <button mat-raised-button [ngClass]="barButtonStyle" mat-button (click)="finish()">Finish</button>
+          </ng-template>
+          <ng-template #nextBlock>
+            <button mat-raised-button [ngClass]="barButtonStyle" mat-button (click)="loadQuestion()">Next</button>
+          </ng-template>
+          &nbsp;&nbsp;
+          <span class="question-explanation-result" *ngIf="isCorrect; then thenBlock else elseBlock"></span>
+          <ng-template #thenBlock>Correct</ng-template>
+          <ng-template #elseBlock>Wrong</ng-template>
+        </ng-container>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="question-viewer-content" *ngIf="state === 'finished'">
+  <h1 class="question-set">Hoorahh...! you have completed the {{questionSet.heading}} questions</h1>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title class="question">Thank you</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="question-result-pane">
+    <mat-card-content>
+      <div>
+        <button mat-raised-button class="bar-button-correct" (click)="close()">Close</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,9 @@
+<!--TODO routing... -->
+
+<see-question-viewer *ngIf="questionSet !== undefined" [questionSet]="questionSet" (closeQuestionViewer)='onCloseQuestionViewer()' class="question-viewer">
+
+</see-question-viewer>
+
+<see-question-selector *ngIf="questionSet === undefined" [questionSetNames]="questionSetNames" (selectQuestionSetName)='onSelectQuestionSetName($event)' class="question-viewer">
+
+</see-question-selector>
