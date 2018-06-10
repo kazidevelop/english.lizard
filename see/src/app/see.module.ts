@@ -7,6 +7,7 @@ import { QuestionViewerComponent } from './question-viewer/question-viewer.compo
 import { SeeMaterialModule } from './see-material.module';
 import { SeeComponent } from './see.component';
 import { QuestionSelectorComponent } from './question-selector/question-selector.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { QuestionSelectorComponent } from './question-selector/question-selector
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FormsModule,
     SeeMaterialModule
   ],

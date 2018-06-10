@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace apisee.Models
 {
-    public partial class Tbluseranswers
+    public class Tbluseranswers
     {
         public int UserAnswerId { get; set; }
         public int FkUserId { get; set; }

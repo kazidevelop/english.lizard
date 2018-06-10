@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace apisee.Models
 {
-    public partial class Tblsets
+    public class Tblsets
     {
         public Tblsets()
         {

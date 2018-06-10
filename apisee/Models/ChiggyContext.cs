@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace apisee.Models
 {
-    public partial class ChiggyContext : DbContext
+    public class ChiggyContext : DbContext
     {
         public ChiggyContext()
         {

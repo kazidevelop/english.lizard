@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { QuestionSet } from '../question-set.model';
 import { Question } from '../question.model';
@@ -10,7 +10,7 @@ import { Question } from '../question.model';
   templateUrl: './question-viewer.component.html',
   styleUrls: ['./question-viewer.component.scss']
 })
-export class QuestionViewerComponent implements OnInit {
+export class QuestionViewerComponent implements OnInit, OnChanges {
   @Input() questionSet: QuestionSet;
   @Output() closeQuestionViewer = new EventEmitter();
 
@@ -61,7 +61,17 @@ export class QuestionViewerComponent implements OnInit {
     this.question = this.questionSet.questions[this.currentQuestionIndex];
   }
 
+  ngOnChanges() {
+    if (this.questionSet && this.questionSet.questions) {
+      this.loadQuestion();
+    }
+
+  }
+
   ngOnInit() {
-    this.loadQuestion();
+    // if (this.questionSet && this.questionSet.questions) {
+    //   this.loadQuestion();
+    // }
+
   }
 }

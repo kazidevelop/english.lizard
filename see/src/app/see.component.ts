@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { QuestionService } from './question.service';
 import { QuestionSet } from './question-set.model';
@@ -14,11 +15,11 @@ export class SeeComponent implements OnInit {
   constructor(private questionService: QuestionService) {
   }
 
-  public questionSet: QuestionSet;
-  public questionSetNames: string[];
+  public questionSet: Observable<QuestionSet>;
+  public questionSetNames: Observable<string[]>;
 
   ngOnInit(): void {
-    this.questionSetNames = this.questionService.GetQuestionNames();
+    this.questionSetNames = this.questionService.getQuestionNames();
   }
 
   public onCloseQuestionViewer() {
@@ -26,7 +27,7 @@ export class SeeComponent implements OnInit {
   }
 
   public onSelectQuestionSetName(setName: string) {
-    this.questionSet = this.questionService.GetQuestionSet(setName);
+    this.questionSet = this.questionService.getQuestionSet(setName);
   }
 
 }
