@@ -1,0 +1,9 @@
+<see-question-viewer *ngIf="questionSet !== null" [questionSet]="questionSet" (closeQuestionViewer)='onCloseQuestionViewer()'
+  class="question-viewer">
+
+</see-question-viewer>
+
+<see-question-selector *ngIf="questionSet === null" [questionSetNames]="questionSetNames" (selectQuestionSetName)='onSelectQuestionSetName($event)'
+  class="question-viewer">
+
+</see-question-selector>

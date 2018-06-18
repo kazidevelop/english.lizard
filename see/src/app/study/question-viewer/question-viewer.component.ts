@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { QuestionSet } from '../question-set.model';
-import { Question } from '../question.model';
-
+import { QuestionSet } from '../../question-set.model';
+import { Question } from '../../question.model';
 
 
 @Component({
@@ -20,28 +19,45 @@ export class QuestionViewerComponent implements OnInit, OnChanges {
   public barButtonStyle: 'bar-button-unanswered' | 'bar-button-wrong' | 'bar-button-correct';
 
   public currentQuestionIndex = -1;
+  public correct = 0;
   public isLast: boolean;
   public isCorrect: boolean;
   public selectedChoice: string;
+  public questionProgress = 0;
+  private actualQuestionProgress = 0;
+  private questionProgressJumps = 0;
+  private numberOfQuestions = 0;
 
   @ViewChild('questionForm') questionForm: NgForm;
 
   constructor() { }
 
   public selectChoice() {
-    this.state = 'answered';
+    if (this.state === 'unanswered') { // radio disabled property binding not working https://github.com/angular/angular/issues/11763
+      this.state = 'answered';
+    }
   }
 
   private isLastQuestion(): boolean {
-    const lastQuestionInSet = this.questionSet.questions.length;
-    return lastQuestionInSet - 1 === this.currentQuestionIndex;
+    return this.numberOfQuestions - 1 === this.currentQuestionIndex;
+  }
+
+  private setResultValues(isCorrect: boolean) {
+    this.isCorrect = isCorrect;
+    this.barStyle = isCorrect ? 'bar-correct' : 'bar-wrong';
+    this.barButtonStyle = isCorrect ? 'bar-button-correct' : 'bar-button-wrong';
+    if (isCorrect) {
+      ++this.correct;
+    }
   }
 
   public check() {
-    this.state = 'checked';
-    this.isCorrect = this.selectedChoice === this.question.answer;
-    this.barStyle = this.isCorrect ? 'bar-correct' : 'bar-wrong';
-    this.barButtonStyle = this.isCorrect ? 'bar-button-correct' : 'bar-button-wrong';
+    if (this.state === 'answered') {
+      this.actualQuestionProgress += this.questionProgressJumps;
+      this.questionProgress = Math.round(this.actualQuestionProgress);
+      this.state = 'checked';
+      this.setResultValues(this.selectedChoice === this.question.answer);
+    }
   }
 
   public close() {
@@ -69,9 +85,7 @@ export class QuestionViewerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    // if (this.questionSet && this.questionSet.questions) {
-    //   this.loadQuestion();
-    // }
-
+    this.numberOfQuestions = this.questionSet.questions.length;
+    this.questionProgressJumps = 100 / this.numberOfQuestions;
   }
 }

@@ -1,26 +1,31 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { QuestionViewerComponent } from './question-viewer/question-viewer.component';
+import { SeeRoutingModule } from './/see-routing.module';
+import { AdminModule } from './admin/admin.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SeeMaterialModule } from './see-material.module';
 import { SeeComponent } from './see.component';
-import { QuestionSelectorComponent } from './question-selector/question-selector.component';
-import { HttpClientModule } from '@angular/common/http';
+import { StudyModule } from './study/study.module';
+
 
 @NgModule({
   declarations: [
     SeeComponent,
-    QuestionViewerComponent,
-    QuestionSelectorComponent
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    SeeMaterialModule
+    SeeMaterialModule,
+    SeeRoutingModule,
+    AdminModule,
+    StudyModule
   ],
   providers: [],
   bootstrap: [SeeComponent]

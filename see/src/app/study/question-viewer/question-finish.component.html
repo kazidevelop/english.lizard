@@ -1,0 +1,17 @@
+<h1 class="question-set">
+  You have completed the {{questionSetHeading}} questions</h1>
+<mat-card>
+  <mat-card-content class="question-finish-content">
+    <div *ngIf="isOverPassMark; then congratulationsBlock else tryAgainBlock"></div>
+    <ng-template #congratulationsBlock>
+      Congratulations!
+    </ng-template>
+    <ng-template #tryAgainBlock>
+      Thank you for the attempt. Please try again later.
+    </ng-template>
+    <br/>
+    <div>
+      You got {{correct}} correct out of {{numberOfQuestions}} questions
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -4,11 +4,15 @@
 
 html {
     background-color: #fafafa;
+    color: rgba(0,0,0,.87);
 }
 
 *{
     font-family: "Roboto", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+.mat-radio-label-content{
+    white-space: normal;
 
+}
 

@@ -1,19 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription, Subject } from 'rxjs';
-
-import { QuestionService } from './question.service';
-import { QuestionSet } from './question-set.model';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Question } from './question.model';
+import { QuestionService } from '../question.service';
+import { QuestionSet } from '../question-set.model';
+import { Question } from '../question.model';
+
 
 
 @Component({
-  selector: 'see-root',
-  templateUrl: './see.component.html',
-  styleUrls: ['./see.component.css']
+  selector: 'see-study',
+  templateUrl: './study.component.html',
+  styleUrls: ['./study.component.css']
 })
-export class SeeComponent implements OnInit, OnDestroy {
-  title = 'see';
+export class StudyComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject();
   constructor(private questionService: QuestionService) {
   }

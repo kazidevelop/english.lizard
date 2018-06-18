@@ -1,11 +1,19 @@
-
+button{
+ font-size: 1.2em;
+}
 
 .question{
-    font-size: 16pt;
+    font-size: 1.3em;
+    color: rgba(0,0,0,.77);
 }
 
 .question-set{
-   margin: 20px;
+   color: rgba(0,0,0,.57);
+}
+
+.question-result
+{
+   font-size: 1.2em;
 }
 .question-radio-group {
   display: inline-flex;
@@ -14,26 +22,28 @@
 
 .question-radio-button {
   margin: 10px;
-  font-size: 12pt;
-
+  font-size: 1.3em;
 }
 
-.question-result-pane
+.question-result-pane-buttons
 {
-  font-size: 34pt !important;
+  margin-top: 5px;
+}
+
+
+.question-explanation-result{
+   font-size: 1.3em !important;
 }
 
 .question-viewer-content {
-   margin-left:20% !important;
-   margin-right:20% !important;
-   font-size: 14pt;
+   margin-left:10% !important;
+   margin-right:10% !important;
 }
+
 .bar-correct
 {
   background-color:  #defabb;
   color: #008b00;
-  //   background-color:  #E8F5E9;00
-  // color: #1B5E20;
 }
 
 .bar-wrong
@@ -52,8 +62,6 @@
 {
    color:  #defabb;
    background-color: #008b00;
-  //   background-color:  #E8F5E9;00
-  // color: #1B5E20;
 }
 
 .bar-button-wrong
@@ -67,9 +75,3 @@
   color:  #fafafa;
   background-color: #212121;
 }
-
-
-//   this.barStyle = this.isCorrect ? '#65ab00' : '#e70800';    this.explanationBackgroundColor = this.isCorrect ? '#bff199' : '#ffd3d1';
-
-//  this.barStyle = this.isCorrect ? '#65ab00' : '#e70800';
-//     this.explanationBackgroundColor = this.isCorrect ? '#bff199' : '#ffd3d1';

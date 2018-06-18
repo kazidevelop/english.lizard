@@ -1,11 +1,10 @@
 <!--TODO routing... -->
 
-<see-question-viewer  [questionSet]="questionSet  | async" (closeQuestionViewer)='onCloseQuestionViewer()'
-    class="question-viewer">
 
-</see-question-viewer>
-
-<see-question-selector *ngIf="questionSet === undefined" [questionSetNames]="questionSetNames | async" (selectQuestionSetName)='onSelectQuestionSetName($event)'
-    class="question-viewer">
-
-</see-question-selector>
+<h1>Angular Router</h1>
+<nav>
+    <a routerLink="/admin" routerLinkActive="active">Admin</a>
+    &nbsp;
+    <a routerLink="/study" routerLinkActive="active">Study</a>
+</nav>
+<router-outlet></router-outlet>
