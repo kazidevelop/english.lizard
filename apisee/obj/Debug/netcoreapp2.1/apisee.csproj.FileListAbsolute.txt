@@ -3,7 +3,6 @@ C:\data\play\20180528_english_lizard\apisee\bin\Debug\netcoreapp2.1\apisee.runti
 C:\data\play\20180528_english_lizard\apisee\bin\Debug\netcoreapp2.1\apisee.runtimeconfig.dev.json
 C:\data\play\20180528_english_lizard\apisee\bin\Debug\netcoreapp2.1\apisee.dll
 C:\data\play\20180528_english_lizard\apisee\bin\Debug\netcoreapp2.1\apisee.pdb
-C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.csprojAssemblyReference.cache
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.csproj.CoreCompileInputs.cache
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.RazorAssemblyInfo.cache
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.RazorAssemblyInfo.cs
@@ -12,3 +11,4 @@ C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.Assem
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.RazorTargetAssemblyInfo.cache
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.dll
 C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.pdb
+C:\data\play\20180528_english_lizard\apisee\obj\Debug\netcoreapp2.1\apisee.csprojAssemblyReference.cache

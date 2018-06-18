@@ -1,0 +1,5 @@
+2#Balls
+dotnet ef dbcontext scaffold "Server=.;Database=Chiggy;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models -f
+dotnet C:\data\play\20180528_english_lizard\apisee\bin\Debug\netcoreapp2.1\apisee.dll
+cd C:\data\play\20180528_english_lizard\see\
+cd C:\data\play\20180528_english_lizard\apisee

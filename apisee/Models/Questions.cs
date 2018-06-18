@@ -3,13 +3,8 @@ using System.Collections.Generic;
 
 namespace apisee.Models
 {
-    public class Tblquestions
+    public partial class Questions
     {
-        public Tblquestions()
-        {
-            Tbluseranswers = new HashSet<Tbluseranswers>();
-        }
-
         public int QuestionId { get; set; }
         public int FkSetId { get; set; }
         public string Question { get; set; }
@@ -19,11 +14,11 @@ namespace apisee.Models
         public string Choice4 { get; set; }
         public string Choice5 { get; set; }
         public string Choice6 { get; set; }
+        public string Choice7 { get; set; }
         public int CorrectAnswerNo { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public Tblsets FkSet { get; set; }
-        public ICollection<Tbluseranswers> Tbluseranswers { get; set; }
+        public Sets FkSet { get; set; }
     }
 }

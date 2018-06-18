@@ -7,6 +7,8 @@
     },
     "configProperties": {
       "System.GC.Server": true
-    }
+    },
+	"applicationUrl": "https://192.168.43.217:5001;http://192.168.43.217:5000"
+
   }
 }
