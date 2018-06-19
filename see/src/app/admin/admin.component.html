@@ -1,3 +1,9 @@
-<p>
-  admin works!
-</p>
+<see-question-editor *ngIf="questionSet !== null" [questionSet]="questionSet" (closeQuestionViewer)='onCloseQuestionViewer()'
+  class="question-viewer">
+
+</see-question-editor>
+
+<see-admin-question-selector *ngIf="questionSet === null" [questionSetNames]="questionSetNames" (selectQuestionSetName)='onSelectQuestionSetName($event)'
+  class="question-viewer">
+
+</see-admin-question-selector>

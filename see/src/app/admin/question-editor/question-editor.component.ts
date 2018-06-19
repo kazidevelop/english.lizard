@@ -1,19 +1,18 @@
-import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
 import { QuestionSet } from '../../question-set.model';
 import { Question } from '../../question.model';
 
 
-
-
+/** @title Responsive sidenav */
 @Component({
   selector: 'see-question-editor',
   templateUrl: './question-editor.component.html',
   styleUrls: ['./question-editor.component.scss']
 })
-export class QuestionEditorComponent implements OnInit, OnChanges {
-  @Input() questionSet: QuestionSet;
-  @Output() closeQuestionViewer = new EventEmitter();
+export class QuestionEditorComponent implements OnDestroy, OnChanges {
 
   public question: Question;
   public state: 'answered' | 'checked' | 'unanswered' | 'finished';
@@ -26,68 +25,43 @@ export class QuestionEditorComponent implements OnInit, OnChanges {
   public isCorrect: boolean;
   public selectedChoice: string;
   public questionProgress = 0;
-  private actualQuestionProgress = 0;
-  private questionProgressJumps = 0;
-  private numberOfQuestions = 0;
+  mobileQuery: MediaQueryList;
+
+
+  @Input() questionSet: QuestionSet;
+  @Output() closeQuestionViewer = new EventEmitter();
+
 
   @ViewChild('questionForm') questionForm: NgForm;
 
-  constructor() { }
-
-  public selectChoice() {
-    if (this.state === 'unanswered') { // radio disabled property binding not working https://github.com/angular/angular/issues/11763
-      this.state = 'answered';
-    }
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  private isLastQuestion(): boolean {
-    return this.numberOfQuestions - 1 === this.currentQuestionIndex;
+  private _mobileQueryListener: () => void;
+
+  ngOnDestroy(): void {
+    this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  private setResultValues(isCorrect: boolean) {
-    this.isCorrect = isCorrect;
-    this.barStyle = isCorrect ? 'bar-correct' : 'bar-wrong';
-    this.barButtonStyle = isCorrect ? 'bar-button-correct' : 'bar-button-wrong';
-    if (isCorrect) {
-      ++this.correct;
-    }
-  }
-
-  public check() {
-    if (this.state === 'answered') {
-      this.actualQuestionProgress += this.questionProgressJumps;
-      this.questionProgress = Math.round(this.actualQuestionProgress);
-      this.state = 'checked';
-      this.setResultValues(this.selectedChoice === this.question.answer);
-    }
+  public choicesAsLines(choices: string[]) {
+    return choices.join('\r\n')
+      ;
   }
 
   public close() {
     this.closeQuestionViewer.emit();
   }
 
-  public finish() {
-    this.state = 'finished';
-  }
+  public loadQuestion(question) {
 
-  private loadQuestion() {
-    this.currentQuestionIndex = this.currentQuestionIndex + 1;
-    this.state = 'unanswered';
-    this.barStyle = 'bar-unanswered';
-    this.barButtonStyle = 'bar-button-unanswered';
-    this.isLast = this.isLastQuestion();
-    this.question = this.questionSet.questions[this.currentQuestionIndex];
+    this.question = question;
   }
 
   ngOnChanges() {
-    if (this.questionSet && this.questionSet.questions) {
-      this.loadQuestion();
-    }
-
+    this.loadQuestion(this.questionSet.questions[0]);
   }
 
-  ngOnInit() {
-    this.numberOfQuestions = this.questionSet.questions.length;
-    this.questionProgressJumps = 100 / this.numberOfQuestions;
-  }
 }
