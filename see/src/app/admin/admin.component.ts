@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   constructor(private questionService: QuestionService) {
   }
 
-  public questionSet = null;
+  public questionSet: QuestionSet = null;
   public questionSets: QuestionSet[];
   public questionSetNames: string[];
 
@@ -30,7 +30,15 @@ export class AdminComponent implements OnInit, OnDestroy {
     const item = this.questionSets.filter((d) => {
       return d.heading === heading;
     })[0];
-    return item;
+
+    const shallowClone = { ...item }; // shallow clone... Spread Syntax
+
+    shallowClone.questions.forEach(question => {
+      question.choices.sort(function (x, y) { return x === question.answer ? -1 : y === question.answer ? 1 : 0; });
+      question.choiceLines = question.choices.join('\n');
+    });
+
+    return shallowClone;
   }
 
   public ngOnInit() {
@@ -47,7 +55,38 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.unsubscribe.complete();
   }
 
-  public onCloseQuestionViewer() {
+  public onCloseQuestionEditor(heading: string) {
+
+    // TODO move to function/class/service
+    this.questionSet.questions.forEach(question => {
+      const choices: string[] = [];
+      if (question.choiceLines.length > 0) {
+        const trimmedValue = question.choiceLines.trim();
+        if (trimmedValue.length > 0) {
+          const aValues = trimmedValue.split('\n');
+          aValues.forEach(aValue => {
+            const trimmedAValue = aValue.trim();
+            if (trimmedAValue.length > 0) {
+              choices.push(trimmedAValue);
+            }
+          });
+        }
+        if (choices.length > 0) {
+          question.answer = choices[0];
+        } else {
+          question.answer = '';
+        }
+        question.choices = choices;
+
+      }
+    });
+
+    let item = this.questionSets.filter((d) => {
+      return d.heading === heading;
+    })[0];
+
+    item = { ...this.questionSet }; // shallow clone... Spread Syntax
+
     this.questionSet = null;
   }
 

@@ -15,6 +15,7 @@ import { AdminQuestionSelectorComponent } from './question-selector/admin-questi
   declarations: [
     AdminComponent,
     QuestionEditorComponent,
-    AdminQuestionSelectorComponent]
+    AdminQuestionSelectorComponent,
+    ]
 })
 export class AdminModule { }

@@ -13,14 +13,16 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content *ngIf="question !== null">
-      <button mat-raised-button class="bar-button-correct" (click)="save()">Save this question</button>
-      <button mat-raised-button class="bar-button-correct" (click)="save()">Add new question</button>
-      <button mat-raised-button class="bar-button-correct" (click)="save()">Delete question</button>
-      <button mat-raised-button class="bar-button-correct" (click)="save()">Previous</button>
-      <button mat-raised-button class="bar-button-correct" (click)="save()">Next</button>
-
-      <textarea>{{question.text}}</textarea>
-      <textarea>{{choicesAsLines(question.choices)}}</textarea>
+      <button mat-raised-button color="accent" (click)="add()">Add new question</button>
+      <button mat-raised-button color="accent" (click)="delete()">Delete question</button>
+      <button mat-raised-button color="default" (click)="previous()">Previous</button>
+      <button mat-raised-button color="default" (click)="next()">Next</button>
+      <button mat-raised-button color="primary" (click)="close()">Close</button>
+      <textarea [(ngModel)]="question.text"></textarea>
+      <div>
+        Right answer is the first one in the list.
+      </div>
+      <textarea [(ngModel)]="question.choiceLines"></textarea>
     </mat-sidenav-content>
   </mat-sidenav-container>
 

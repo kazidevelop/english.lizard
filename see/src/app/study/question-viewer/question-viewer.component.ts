@@ -26,7 +26,7 @@ export class QuestionViewerComponent implements OnInit, OnChanges {
   public questionProgress = 0;
   private actualQuestionProgress = 0;
   private questionProgressJumps = 0;
-  private numberOfQuestions = 0;
+  public numberOfQuestions = 0;
 
   @ViewChild('questionForm') questionForm: NgForm;
 
