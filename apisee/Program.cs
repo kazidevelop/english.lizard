@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.HttpSys;
@@ -10,12 +8,12 @@ using Microsoft.AspNetCore.Server.HttpSys;
 namespace apisee
 {
     /// <summary>
-    /// Executing the "dotnet run" command in the application folder will run this app.
+    ///     Executing the "dotnet run" command in the application folder will run this app.
     /// </summary>
     public class Program
     {
-
         #region snippet_Main
+
         public static void Main(string[] args)
         {
             Console.WriteLine("Running demo with HTTP.sys.");
@@ -26,6 +24,7 @@ namespace apisee
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 #region snippet_Options
+
                 .UseHttpSys(options =>
                 {
                     options.Authentication.AllowAnonymous = true;
@@ -36,8 +35,10 @@ namespace apisee
                     options.UrlPrefixes.Add("http://192.168.43.217:5000");
                 })
                 #endregion
+
                 .UseStartup<Startup>()
                 .Build();
+
         #endregion
     }
 }

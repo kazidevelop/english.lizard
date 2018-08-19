@@ -8,16 +8,15 @@ namespace apisee.Services
 {
     public class QuestionSetService
     {
-
         private readonly ChiggyContext _context;
 
         public QuestionSetService(ChiggyContext context)
         {
             _context = context;
         }
+
         public IEnumerable<QuestionSetViewModel> GetQuestionSets()
         {
-
             var sets = _context.Sets
                 .Include(b => b.Questions)
                 .Where(d => d.Questions.Any())

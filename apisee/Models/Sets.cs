@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace apisee.Models
 {
-    public partial class Sets
+    public class Sets
     {
         public Sets()
         {

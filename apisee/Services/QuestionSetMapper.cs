@@ -37,7 +37,7 @@ namespace apisee.Services
                 {
                     tblQuestion,
                     choices = GetChoices(tblQuestion)
-                }).Where(d=>d.choices.Any())
+                }).Where(d => d.choices.Any())
                 ?.Select(t => new QuestionViewModel
                 {
                     Text = t.tblQuestion.Question,
@@ -62,7 +62,4 @@ namespace apisee.Services
             return choices.Where(d => !string.IsNullOrWhiteSpace(d)).ToList();
         }
     }
-
-   
-
 }
