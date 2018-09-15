@@ -1,0 +1,75 @@
+
+
+.question{
+    font-size: 16pt;
+}
+
+.question-set{
+   margin: 20px;
+}
+.question-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.question-radio-button {
+  margin: 10px;
+  font-size: 12pt;
+
+}
+
+.question-result-pane
+{
+  font-size: 34pt !important;
+}
+
+.question-viewer-content {
+   margin-left:20% !important;
+   margin-right:20% !important;
+   font-size: 14pt;
+}
+.bar-correct
+{
+  background-color:  #defabb;
+  color: #008b00;
+  //   background-color:  #E8F5E9;00
+  // color: #1B5E20;
+}
+
+.bar-wrong
+{
+  background-color:  #FFEBEE;
+  color: #B71C1C;
+}
+
+.bar-unanswered
+{
+  background-color:  #fafafa;
+  color: #212121;
+}
+
+.bar-button-correct
+{
+   color:  #defabb;
+   background-color: #008b00;
+  //   background-color:  #E8F5E9;00
+  // color: #1B5E20;
+}
+
+.bar-button-wrong
+{
+  color:  #FFEBEE;
+   background-color: #B71C1C;
+}
+
+.bar-button-unanswered
+{
+  color:  #fafafa;
+  background-color: #212121;
+}
+
+
+//   this.barStyle = this.isCorrect ? '#65ab00' : '#e70800';    this.explanationBackgroundColor = this.isCorrect ? '#bff199' : '#ffd3d1';
+
+//  this.barStyle = this.isCorrect ? '#65ab00' : '#e70800';
+//     this.explanationBackgroundColor = this.isCorrect ? '#bff199' : '#ffd3d1';
