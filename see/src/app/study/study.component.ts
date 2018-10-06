@@ -3,9 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { QuestionService } from '../shared/question.service';
- import { Question } from '../shared/question.model';
-
-
+import { Question } from '../shared/question.model';
 
 @Component({
   selector: 'see-study',
@@ -19,9 +17,8 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   public questionSet = null;
   public questionSets: QuestionSet[];
- 
-  // Fisher–Yates shuffle
 
+  // Fisher–Yates shuffle
   private doFisherYatesShuffle(inputArray: any[]): any[] {
     for (let i: number = inputArray.length - 1; i >= 0; i--) {
       const randomIndex: number = Math.floor(Math.random() * (i + 1));
@@ -60,8 +57,6 @@ export class StudyComponent implements OnInit, OnDestroy {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
-
 
   public onCloseQuestionViewer() {
     this.questionSet = null;

@@ -8,7 +8,6 @@ import { Question } from './shared/question.model';
 import { Title } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material';
 
-
 @Component({
   selector: 'see-root',
   templateUrl: './see.component.html',
@@ -30,9 +29,8 @@ export class SeeComponent implements OnInit, OnDestroy {
     this.headerText = newTitle;
     this.sidenav.close();
   }
- 
-  // Fisher–Yates shuffle
 
+  // Fisher–Yates shuffle
   private doFisherYatesShuffle(inputArray: any[]): any[] {
     for (let i: number = inputArray.length - 1; i >= 0; i--) {
       const randomIndex: number = Math.floor(Math.random() * (i + 1));
@@ -58,7 +56,6 @@ export class SeeComponent implements OnInit, OnDestroy {
     return this.doFisherYatesShuffle(questions);
   }
 
-
   public ngOnInit() {
     this.questionService.getQuestionSets()
       .pipe(takeUntil(this.unsubscribe))
@@ -71,8 +68,6 @@ export class SeeComponent implements OnInit, OnDestroy {
     this.unsubscribe.next();
     this.unsubscribe.complete();
   }
-
-
 
   public onCloseQuestionViewer() {
     this.questionSet = null;
