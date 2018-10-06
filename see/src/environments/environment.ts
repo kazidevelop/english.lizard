@@ -4,9 +4,6 @@
 
 export const environment = {
   production: false,
-  //apiUrl: 'https://appsee.azurewebsites.net/api/'
-  //apiUrl: 'http://192.168.43.217:5000/api/'
-
   apiUrl: 'http://localhost:5000/api/'
 
 };

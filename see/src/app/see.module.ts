@@ -10,7 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SeeMaterialModule } from './see-material.module';
 import { SeeComponent } from './see.component';
 import { StudyModule } from './study/study.module';
-
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { StudyModule } from './study/study.module';
     FormsModule,
     SeeMaterialModule,
     SeeRoutingModule,
+    SharedModule,
     AdminModule,
     StudyModule
   ],

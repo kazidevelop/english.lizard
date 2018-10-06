@@ -25,5 +25,13 @@ namespace apisee.Controllers
             var service = new QuestionSetService(_context); // TODO inject 
             return service.GetQuestionSets();
         }
+        [HttpPost]
+        public void SaveSet(QuestionSetViewModel questionSet)
+        {
+            var service = new QuestionSetService(_context);
+            service.SaveQuestionSet(questionSet);
+
+            
+        }
     }
 }

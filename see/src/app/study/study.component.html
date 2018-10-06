@@ -3,7 +3,7 @@
 
 </see-question-viewer>
 
-<see-question-selector *ngIf="questionSet === null" [questionSetNames]="questionSetNames" (selectQuestionSetName)='onSelectQuestionSetName($event)'
-  class="question-viewer">
+<see-question-selector *ngIf="questionSet === null" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
+  class="question-selector">
 
 </see-question-selector>

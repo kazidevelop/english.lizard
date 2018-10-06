@@ -10,8 +10,8 @@
     <WebStackScaffolding_LayoutPageFile />
     <WebStackScaffolding_DbContextTypeFullName>apisee.Models.ChiggyContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
-    <NameOfLastUsedPublishProfile>CustomProfile</NameOfLastUsedPublishProfile>
-    <ActiveDebugProfile>apisee</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>Appsee - Web Deploy</NameOfLastUsedPublishProfile>
+    <ActiveDebugProfile>api</ActiveDebugProfile>
     <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

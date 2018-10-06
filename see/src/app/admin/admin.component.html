@@ -1,9 +1,9 @@
 <see-question-editor *ngIf="questionSet !== null" [questionSet]="questionSet" (closeQuestionEditor)='onCloseQuestionEditor($event)'
   class="question-viewer">
-
 </see-question-editor>
-
-<see-admin-question-selector *ngIf="questionSet === null" [questionSetNames]="questionSetNames" (selectQuestionSetName)='onSelectQuestionSetName($event)'
+<mat-toolbar>
+    <button mat-raised-button *ngIf="questionSet === null"  (click)="addNewQuestionSet()"><i class="material-icons">add</i></button>
+</mat-toolbar>
+<see-question-selector *ngIf="questionSet === null" [contextColour]="'warn'" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
   class="question-viewer">
-
-</see-admin-question-selector>
+</see-question-selector>

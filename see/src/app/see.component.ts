@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Observable, Subscription, Subject } from 'rxjs';
 
-import { QuestionService } from './question.service';
-import { QuestionSet } from './question-set.model';
+import { QuestionService } from './shared/question.service';
+import { QuestionSet } from './shared/question-set.model';
 import { takeUntil } from 'rxjs/operators';
-import { Question } from './question.model';
+import { Question } from './shared/question.model';
+import { Title } from '@angular/platform-browser';
+import { MatSidenav } from '@angular/material';
 
 
 @Component({
@@ -13,15 +15,22 @@ import { Question } from './question.model';
   styleUrls: ['./see.component.css']
 })
 export class SeeComponent implements OnInit, OnDestroy {
-  title = 'see';
+  title = 'Study.Learn.Ready.Love';
   private unsubscribe = new Subject();
-  constructor(private questionService: QuestionService) {
-  }
+  @ViewChild('drawer') public sidenav: MatSidenav;
 
+  constructor(private questionService: QuestionService, private titleService: Title) {
+  }
+  public headerText = 'Study';
   public questionSet = null;
   public questionSets: QuestionSet[];
-  public questionSetNames: string[];
 
+  public openPage(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+    this.headerText = newTitle;
+    this.sidenav.close();
+  }
+ 
   // Fisher–Yates shuffle
 
   private doFisherYatesShuffle(inputArray: any[]): any[] {
@@ -32,12 +41,6 @@ export class SeeComponent implements OnInit, OnDestroy {
       inputArray[i] = itemAtIndex;
     }
     return inputArray;
-  }
-
-
-  private getQuestionSetNames(): string[] {
-    return this.questionSets.
-      map(d => d.heading);
   }
 
   public getQuestionSet(heading: string): QuestionSet {
@@ -61,7 +64,6 @@ export class SeeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
         this.questionSets = questionSets;
-        this.questionSetNames = this.getQuestionSetNames();
       });
   }
 
@@ -76,8 +78,8 @@ export class SeeComponent implements OnInit, OnDestroy {
     this.questionSet = null;
   }
 
-  public onSelectQuestionSetName(setName: string) {
-    this.questionSet = this.getQuestionSet(setName);
+  public onSelectQuestionSet(set: QuestionSet) {
+    this.questionSet = set;
   }
 
 }

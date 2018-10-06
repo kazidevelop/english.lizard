@@ -6,6 +6,9 @@ namespace apisee.ViewModels
     [DataContract(Name = "questionSet")]
     public class QuestionSetViewModel
     {
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
+
         [DataMember(Name = "heading")]
         public string Heading { get; set; }
 

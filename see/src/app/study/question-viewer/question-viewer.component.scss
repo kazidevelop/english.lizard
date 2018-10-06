@@ -1,9 +1,5 @@
-button{
- font-size: 1.2em;
-}
 
 .question{
-    font-size: 1.3em;
     color: rgba(0,0,0,.77);
 }
 
@@ -11,10 +7,6 @@ button{
    color: rgba(0,0,0,.57);
 }
 
-.question-result
-{
-   font-size: 1.2em;
-}
 .question-radio-group {
   display: inline-flex;
   flex-direction: column;
@@ -22,7 +14,6 @@ button{
 
 .question-radio-button {
   margin: 10px;
-  font-size: 1.3em;
 }
 
 .question-result-pane-buttons
@@ -30,11 +21,7 @@ button{
   margin-top: 5px;
 }
 
-
-.question-explanation-result{
-   font-size: 1.3em !important;
-}
-
+ 
 .question-viewer-content {
    margin-left:10% !important;
    margin-right:10% !important;

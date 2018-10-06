@@ -14,5 +14,8 @@ namespace apisee.ViewModels
 
         [DataMember(Name = "answer")]
         public string Answer { get; set; }
+
+        [DataMember(Name = "id")]
+        public int Id { get; set; }
     }
 }

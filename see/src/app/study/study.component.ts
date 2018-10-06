@@ -1,9 +1,9 @@
+import { QuestionSet } from './../shared/question-set.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { QuestionService } from '../question.service';
-import { QuestionSet } from '../question-set.model';
-import { Question } from '../question.model';
+import { QuestionService } from '../shared/question.service';
+ import { Question } from '../shared/question.model';
 
 
 
@@ -19,8 +19,7 @@ export class StudyComponent implements OnInit, OnDestroy {
 
   public questionSet = null;
   public questionSets: QuestionSet[];
-  public questionSetNames: string[];
-
+ 
   // Fisher–Yates shuffle
 
   private doFisherYatesShuffle(inputArray: any[]): any[] {
@@ -31,12 +30,6 @@ export class StudyComponent implements OnInit, OnDestroy {
       inputArray[i] = itemAtIndex;
     }
     return inputArray;
-  }
-
-
-  private getQuestionSetNames(): string[] {
-    return this.questionSets.
-      map(d => d.heading);
   }
 
   public getQuestionSet(heading: string): QuestionSet {
@@ -60,8 +53,7 @@ export class StudyComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
         this.questionSets = questionSets;
-        this.questionSetNames = this.getQuestionSetNames();
-      });
+       });
   }
 
   public ngOnDestroy() {
@@ -75,8 +67,8 @@ export class StudyComponent implements OnInit, OnDestroy {
     this.questionSet = null;
   }
 
-  public onSelectQuestionSetName(setName: string) {
-    this.questionSet = this.getQuestionSet(setName);
+  public onSelectQuestionSet(set: QuestionSet) {
+    this.questionSet = set;
   }
 
 }

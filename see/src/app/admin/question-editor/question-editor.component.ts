@@ -1,9 +1,12 @@
-import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, ViewChild } from '@angular/core';
+import { DialogQuestionEditorComponent } from './dialog-question-editor.component';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { QuestionSet } from '../../question-set.model';
-import { Question } from '../../question.model';
+import { QuestionSet } from '../../shared/question-set.model';
+import { Question } from '../../shared/question.model';
+import { QuestionService } from '../../shared/question.service';
+import { MatDialog } from '@angular/material';
+import { DialogPopupOptions } from './dialog-data.model';
 
 
 /** @title Responsive sidenav */
@@ -12,7 +15,7 @@ import { Question } from '../../question.model';
   templateUrl: './question-editor.component.html',
   styleUrls: ['./question-editor.component.scss']
 })
-export class QuestionEditorComponent implements OnDestroy, OnChanges {
+export class QuestionEditorComponent implements OnChanges {
 
   public question: Question;
   public state: 'answered' | 'checked' | 'unanswered' | 'finished';
@@ -25,42 +28,29 @@ export class QuestionEditorComponent implements OnDestroy, OnChanges {
   public isCorrect: boolean;
   public selectedChoice: string;
   public questionProgress = 0;
-  mobileQuery: MediaQueryList;
-
 
   @Input() questionSet: QuestionSet;
   @Output() closeQuestionEditor = new EventEmitter<string>(); // TODO pass qusetionSet?
-
-
   @ViewChild('questionForm') questionForm: NgForm;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+  constructor(private questionService: QuestionService, public dialog: MatDialog) {
   }
-
-
-  private _mobileQueryListener: () => void;
-
-  ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
-  }
-
-
 
   public close() {
-    this.closeQuestionEditor.emit(this.questionSet.heading);
+    const dialogRef = this.dialog.open(DialogQuestionEditorComponent, {
+      data: { name: this.questionSet.heading }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== DialogPopupOptions.Cancel) {
+        this.closeQuestionEditor.emit(result);
+      }
+
+    });
   }
 
-
   public add() {
-    const question: Question = {
-      text: 'new question ' + this.questionSet.questions.length,
-      answer: 'choice1',
-      choices: ['choice1', 'choice2', 'choice3'],
-      choiceLines: 'choice1\r\nchoice2\r\nchoice3' // tooltip?
-    };
+    const question: Question = this.questionService.getNewQuestion(this.questionSet.questions.length);
     this.questionSet.questions.push(question);
     this.currentQuestionIndex = this.questionSet.questions.length;
     this.loadQuestionByIndex();
@@ -98,3 +88,4 @@ export class QuestionEditorComponent implements OnDestroy, OnChanges {
   }
 
 }
+

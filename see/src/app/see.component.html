@@ -1,10 +1,36 @@
-<h1>Study. <img src="assets/logo.png" />. Laugh. Eat. Repeat</h1>
-<a routerLink="/study" routerLinkActive="active" mat-raised-button ><i class="material-icons">book</i>Study</a>
-&nbsp;
-<a routerLink="/admin" routerLinkActive="active" mat-raised-button ><i class="material-icons">settings</i>Admin</a>
-<hr>
-<p>Select a set of fun questions below</p>
-<router-outlet></router-outlet>
+<!DOCTYPE html>
+
+<html>
+<mat-toolbar  >
+  <mat-toolbar-row>
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+   {{headerText}}
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="over" closed role="navigation">
+    <mat-nav-list>
+      <a mat-list-item routerLink='/study' (click)="openPage('Study')"><i class="material-icons">book</i>&nbsp;Study</a>
+      <a mat-list-item routerLink='/admin'(click)="openPage('Admin')"><i class="material-icons">settings</i>&nbsp;Admin</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
 <div style="display: none">Icons made by <a href="https://www.flaticon.com/authors/twitter" title="Twitter">Twitter</a>
-    from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
-        title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+  from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
+    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<h3><a class="home-page-link" href="/">Study. <img src="assets/logo.png" />. Laugh. *. Repeat</a></h3>
+<!-- <mat-toolbar>
+  <a routerLink="/study" routerLinkActive="active" mat-raised-button><i class="material-icons">book</i>&nbsp;Study</a>
+  &nbsp;
+  <a routerLink="/admin" routerLinkActive="active" mat-raised-button color="warn"><i class="material-icons">settings</i>&nbsp;Add/Edit/Change</a>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<hr>
+ -->
+
+</html>

@@ -1,10 +1,10 @@
+import { QuestionSet } from './../shared/question-set.model';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { QuestionSet } from '../question-set.model';
-import { QuestionService } from '../question.service';
-
+import { QuestionService } from '../shared/question.service';
+import { DialogPopupOptions } from './question-editor/dialog-data.model';
 @Component({
   selector: 'see-admin',
   templateUrl: './admin.component.html',
@@ -17,28 +17,18 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public questionSet: QuestionSet = null;
   public questionSets: QuestionSet[];
-  public questionSetNames: string[];
 
-
-
-  private getQuestionSetNames(): string[] {
-    return this.questionSets.
-      map(d => d.heading);
+  public addNewQuestionSet() {
+    this.questionSet = this.questionService.getNewQuestionSet();
   }
 
-  public getQuestionSet(heading: string): QuestionSet {
-    const item = this.questionSets.filter((d) => {
-      return d.heading === heading;
-    })[0];
-
-    const shallowClone = { ...item }; // shallow clone... Spread Syntax
-
-    shallowClone.questions.forEach(question => {
+  public getQuestionSetClone(set: QuestionSet): QuestionSet {
+    const clone = (JSON.parse(JSON.stringify(set)));
+    clone.questions.forEach(question => {
       question.choices.sort(function (x, y) { return x === question.answer ? -1 : y === question.answer ? 1 : 0; });
       question.choiceLines = question.choices.join('\n');
     });
-
-    return shallowClone;
+    return clone;
   }
 
   public ngOnInit() {
@@ -46,7 +36,6 @@ export class AdminComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
         this.questionSets = questionSets;
-        this.questionSetNames = this.getQuestionSetNames();
       });
   }
 
@@ -55,8 +44,7 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.unsubscribe.complete();
   }
 
-  public onCloseQuestionEditor(heading: string) {
-
+  private setQuestionSetAnswers() {
     // TODO move to function/class/service
     this.questionSet.questions.forEach(question => {
       const choices: string[] = [];
@@ -77,21 +65,21 @@ export class AdminComponent implements OnInit, OnDestroy {
           question.answer = '';
         }
         question.choices = choices;
-
       }
     });
+  }
 
-    let item = this.questionSets.filter((d) => {
-      return d.heading === heading;
-    })[0];
-
-    item = { ...this.questionSet }; // shallow clone... Spread Syntax
-
+  public onCloseQuestionEditor(option: DialogPopupOptions) {
+    if (option === DialogPopupOptions.Yes) {
+      this.setQuestionSetAnswers();
+      this.questionService.saveQuestionSet(this.questionSet);
+      console.log('TODO: notify question has been saved successfully');
+    }
     this.questionSet = null;
   }
 
-  public onSelectQuestionSetName(setName: string) {
-    this.questionSet = this.getQuestionSet(setName);
+  public onSelectQuestionSet(set: QuestionSet) {
+    this.questionSet = this.getQuestionSetClone(set);
   }
 
 }

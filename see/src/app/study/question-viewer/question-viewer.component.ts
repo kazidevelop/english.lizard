@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { QuestionSet } from '../../question-set.model';
-import { Question } from '../../question.model';
+import { QuestionSet } from '../../shared/question-set.model';
+import { Question } from '../../shared/question.model';
 
 
 @Component({
