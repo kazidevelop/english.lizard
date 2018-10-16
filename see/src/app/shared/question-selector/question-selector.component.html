@@ -1,7 +1,7 @@
 <mat-card class="question-card"  *ngFor="let set of questionSets; trackBy:set?.id" >
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"><i class="material-icons">gesture</i></div>
-      <mat-card-title>{{set.heading}}</mat-card-title>
+      <div mat-card-avatar class="set-image"><i class="material-icons">gesture</i></div>
+      <mat-card-title class="set-heading">{{set.heading}}</mat-card-title>
       <mat-card-subtitle *ngIf="set.questions.length > 1">{{set.questions.length}} questions</mat-card-subtitle>
       <mat-card-subtitle *ngIf="set.questions.length == 1">1 question</mat-card-subtitle>
     </mat-card-header>

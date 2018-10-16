@@ -1,0 +1,9 @@
+.float-button-container {
+  border: solid 1px #ff0000;
+  z-index: 5;
+  position: fixed;
+  display: flex;
+  align-self: flex-end;
+  bottom: 10%;
+  right: 10px;
+}
