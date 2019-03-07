@@ -1,8 +1,8 @@
 <div *ngIf="questionSet === null; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
-  <see-question-selector [contextColour]="'warn'" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
+  <see-admin-question-selector [contextColour]="'warn'" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
     class="question-viewer">
-  </see-question-selector>
+  </see-admin-question-selector>
   <div class="float-button-container">
     <button mat-fab (click)="addNewQuestionSet()"><i class="material-icons">add</i></button>
   </div>

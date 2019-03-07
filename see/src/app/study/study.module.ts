@@ -7,12 +7,14 @@ import { SeeMaterialModule } from '../see-material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { QuestionSelectorComponent } from './question-selector/question-selector.component';
 
 @NgModule({
   declarations: [
     StudyComponent,
     QuestionViewerComponent,
-    QuestionFinishComponent
+    QuestionFinishComponent,
+    QuestionSelectorComponent
   ],
   imports: [
     CommonModule,

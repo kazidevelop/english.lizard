@@ -13,16 +13,16 @@
       </td>
     </tr>
   </table>
-  <button mat-button class="see-button" (click)="delete()">
+  <button mat-raised-button class="see-button" (click)="delete()">
     <mat-icon>delete_outline</mat-icon>&nbsp;Delete
   </button> &nbsp;
-  <button mat-button class="see-button" (click)="add()">
+  <button mat-raised-button class="see-button" (click)="add()">
     <mat-icon>add_circle_outline</mat-icon>&nbsp;Add
   </button> &nbsp;
-  <button mat-button class="see-button" (click)="previous()">
+  <button mat-raised-button class="see-button" (click)="previous()">
     <mat-icon>arrow_left</mat-icon>&nbsp;Previous
   </button> &nbsp;
-  <button mat-button class="see-button" (click)="next()">
+  <button mat-raised-button class="see-button" (click)="next()">
     Next&nbsp;<mat-icon>arrow_right</mat-icon>
   </button>
   <h3>Question #: {{currentQuestionIndex+1}}/{{questionSet.questions.length}}</h3>

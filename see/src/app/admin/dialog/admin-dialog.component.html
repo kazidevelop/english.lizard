@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Remove Question Set</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to delete {{data.name}} and all its questions and answers </p>
+  <p>This action cannot be reversed</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary"  (click)="onYesClick()">Delete Permanently</button>
+  <button mat-raised-button  (click)="onCancelClick()" cdkFocusInitial>Cancel</button>
+</div>
+

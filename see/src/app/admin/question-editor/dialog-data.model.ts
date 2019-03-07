@@ -1,6 +1,4 @@
 
-import { MatDialog } from '@angular/material';
-
 export default interface DialogData {
   animal: string;
   name: string;

@@ -24,10 +24,10 @@
         <ng-container *ngSwitchCase="'checked'">
           <span *ngIf="isLast; then closeBlock else nextBlock"></span>
           <ng-template #closeBlock>
-            <button mat-raised-button [ngClass]="barButtonStyle" mat-button (click)="finish()">Finish</button>
+            <button mat-raised-button [ngClass]="barButtonStyle" mat-raised-button (click)="finish()">Finish</button>
           </ng-template>
           <ng-template #nextBlock>
-            <button mat-raised-button [ngClass]="barButtonStyle" mat-button (click)="loadQuestion()">Next</button>
+            <button mat-raised-button [ngClass]="barButtonStyle" mat-raised-button (click)="loadQuestion()">Next</button>
           </ng-template>
           &nbsp;&nbsp;
           <ng-container *ngIf="isCorrect; then thenBlock else elseBlock"></ng-container>

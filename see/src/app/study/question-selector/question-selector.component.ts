@@ -1,6 +1,6 @@
-import { QuestionSet } from './../question-set.model';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { I18nPluralPipe } from '@angular/common';
+import { QuestionSet } from 'src/app/shared/question-set.model';
 
 @Component({
   selector: 'see-question-selector',
@@ -16,9 +16,9 @@ export class QuestionSelectorComponent {
 
   itemPluralMapping = {
     'question': {
-      '=0' : 'Empty Set',
-      '=1' : '1 Question',
-      'other' : '# Questions'
+      '=0': 'Empty Set',
+      '=1': '1 Question',
+      'other': '# Questions'
     }
   };
 
@@ -26,11 +26,5 @@ export class QuestionSelectorComponent {
     this.selectQuestionSet.emit(set);
   }
 
-  public deleteSet(set: QuestionSet) {
-   event.cancelBubble = true;
-  }
-  public addQuestionSet() {
-    this.selectQuestionSet.emit();
-  }
 
 }
