@@ -1,21 +1,35 @@
 <div class="admin-container">
-  <label>Question set heading:</label>&nbsp;&nbsp;<input [(ngModel)]="questionSet.heading" style="width: 100%;" />
-  <mat-toolbar>
-    <button mat-raised-button color="warn" (click)="add()">Add</button>
-    &nbsp;
-    <button mat-raised-button color="warn" (click)="delete()">Delete</button>
-    &nbsp;
-    <button mat-raised-button color="warn" (click)="previous()">Previous</button>
-    &nbsp;
-    <button mat-raised-button color="warn" (click)="next()">Next</button>
-    &nbsp;
-    <button mat-raised-button color="warn" (click)="close()">Close</button>
-  </mat-toolbar>
-
-  <textarea [(ngModel)]="question.text"></textarea>
-  <div>{{currentQuestionIndex+1}}/{{questionSet.questions.length}}</div>
-  <p>
-    Right answer is the first one in the list.
-  </p>
-  <textarea [(ngModel)]="question.choiceLines"></textarea>
+  <table border="0" style="width: 100%">
+    <tr>
+      <td style="width:8px;">
+        <div>
+          <button mat-icon-button (click)="close()">
+            <mat-icon>arrow_back</mat-icon>
+          </button>
+        </div>
+      </td>
+      <td>
+        <input matInput placeholder="heading" [(ngModel)]="questionSet.heading" />
+      </td>
+    </tr>
+  </table>
+  <button mat-button class="see-button" (click)="delete()">
+    <mat-icon>delete_outline</mat-icon>&nbsp;Delete
+  </button> &nbsp;
+  <button mat-button class="see-button" (click)="add()">
+    <mat-icon>add_circle_outline</mat-icon>&nbsp;Add
+  </button> &nbsp;
+  <button mat-button class="see-button" (click)="previous()">
+    <mat-icon>arrow_left</mat-icon>&nbsp;Previous
+  </button> &nbsp;
+  <button mat-button class="see-button" (click)="next()">
+    Next&nbsp;<mat-icon>arrow_right</mat-icon>
+  </button>
+  <h3>Question #: {{currentQuestionIndex+1}}/{{questionSet.questions.length}}</h3>
+  <mat-form-field class="text-input">
+    <textarea matInput placeholder="question" [(ngModel)]="question.text"></textarea>
+  </mat-form-field>
+  <mat-form-field class="text-input">
+    <textarea matInput placeholder="choices - right answer is the first one in the list" [(ngModel)]="question.choiceLines"></textarea>
+  </mat-form-field>
 </div>

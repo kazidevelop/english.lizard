@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <html>
-<mat-toolbar class="toolbar"  >
+<mat-toolbar class="toolbar" *ngIf="1==0" >
   <mat-toolbar-row>
     <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary">
       <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -24,13 +24,5 @@
   from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 <h3><a class="home-page-link" href="/">Study. <img src="assets/logo.png" />. Laugh. *. Repeat</a></h3>
-<!-- <mat-toolbar>
-  <a routerLink="/study" routerLinkActive="active" mat-raised-button><i class="material-icons">book</i>&nbsp;Study</a>
-  &nbsp;
-  <a routerLink="/admin" routerLinkActive="active" mat-raised-button color="warn"><i class="material-icons">settings</i>&nbsp;Add/Edit/Change</a>
-</mat-toolbar>
-<router-outlet></router-outlet>
-<hr>
- -->
 
 </html>

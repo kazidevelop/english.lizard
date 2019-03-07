@@ -61,6 +61,8 @@ export class SeeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
         this.questionSets = questionSets;
+        // XXXX dummy life,, why repeat in admin?
+       // this.questionSet = questionSets[0];
       });
   }
 
