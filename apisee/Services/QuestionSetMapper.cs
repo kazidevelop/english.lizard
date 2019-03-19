@@ -11,19 +11,10 @@ namespace apisee.Services
 
         public IEnumerable<QuestionSetViewModel> GetViewSets(List<Sets> sets)
         {
-            var viewSets = new List<QuestionSetViewModel>();
-            foreach (var set in sets)
+            return sets.Select(set => new QuestionSetViewModel
             {
-                var viewSet = new QuestionSetViewModel
-                {
-                    Id = set.SetId,
-                    Heading = set.SetName,
-                    Questions = GetQuestions(set)
-                };
-                viewSets.Add(viewSet);
-            }
-
-            return viewSets;
+                Id = set.SetId, Heading = set.SetName, Questions = GetQuestions(set)
+            }).ToList();
         }
 
         private List<QuestionViewModel> GetQuestions(Sets set)

@@ -14,6 +14,8 @@ export class AdminQuestionSelectorComponent {
   @Input() questionSets: QuestionSet[];
   @Input() contextColour: string;
   @Output() selectQuestionSet = new EventEmitter<QuestionSet>();
+  @Output() deleteQuestionSet = new EventEmitter<QuestionSet>();
+
 
   constructor(public dialog: MatDialog) { }
 
@@ -37,16 +39,10 @@ export class AdminQuestionSelectorComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result !== AdminDialogPopupOptions.Cancel) {
-
+        this.deleteQuestionSet.emit(set);
       }
-
     });
-
-
-
   }
-
-
 
   public addQuestionSet() {
     this.selectQuestionSet.emit();

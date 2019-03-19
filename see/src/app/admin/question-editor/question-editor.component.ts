@@ -16,7 +16,7 @@ import { DialogPopupOptions } from './dialog-data.model';
   styleUrls: ['./question-editor.component.scss']
 })
 export class QuestionEditorComponent implements OnChanges, OnInit {
- 
+
   public question: Question;
   public state: 'answered' | 'checked' | 'unanswered' | 'finished';
   public barStyle: 'bar-unanswered' | 'bar-wrong' | 'bar-correct';
@@ -30,7 +30,7 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
   public questionProgress = 0;
 
   @Input() questionSet: QuestionSet;
-  @Output() closeQuestionEditor = new EventEmitter<string>(); // TODO pass qusetionSet?
+  @Output() closeQuestionEditor = new EventEmitter<DialogPopupOptions>(); // TODO pass qusetionSet?
   @ViewChild('questionForm') questionForm: NgForm;
 
   constructor(private questionService: QuestionService, public dialog: MatDialog) {
@@ -43,7 +43,12 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     });
   }
 
-  public close() {
+  public cancel() {
+    this.closeQuestionEditor.emit(DialogPopupOptions.No);
+  }
+
+
+  public save() {
     const dialogRef = this.dialog.open(DialogQuestionEditorComponent, {
       data: { name: this.questionSet.heading }
     });

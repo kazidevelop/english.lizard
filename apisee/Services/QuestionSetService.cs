@@ -6,81 +6,83 @@ using apisee.Models;
 using apisee.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace apisee.Services
-{
-    public class QuestionSetService
-    {
+namespace apisee.Services {
+    public class QuestionSetService {
         private readonly ChiggyContext _context;
-        public QuestionSetService(ChiggyContext context)
-        {
+        public QuestionSetService (ChiggyContext context) {
             _context = context;
         }
-        public IEnumerable<QuestionSetViewModel> GetQuestionSets()
-        {
-            try
-            {
+        public IEnumerable<QuestionSetViewModel> GetQuestionSets () {
+            try {
 
                 var contextSets = _context.Sets;
                 var sets = contextSets
-                     .Include(b => b.Questions)
-                     .Where(d => d.Questions.Any())
-                     .ToList();
-                var viewSets = new QuestionSetMapper().GetViewSets(sets); // TODO inject... 
+                    .Include (b => b.Questions)
+                    .Where (d => d.Questions.Any ())
+                    .ToList ();
+                var viewSets = new QuestionSetMapper ().GetViewSets (sets); // TODO inject... 
                 return viewSets;
+            } catch (Exception e) {
+                Trace.TraceError ($"GetQuestionSets: {e}");
             }
-            catch (Exception e)
-            {
-                Trace.TraceError($"GetQuestionSets: {e}");
-            }
-            return new List<QuestionSetViewModel>();
+            return new List<QuestionSetViewModel> ();
         }
 
-        internal void SaveQuestionSet(QuestionSetViewModel questionSet)
-        {
-            var previousDatabaseSet = _context.Sets.Include(d => d.Questions).FirstOrDefault(set => set.SetId == questionSet.Id);
+        internal void DeleteQuestonSet (int questionSetId) {
+            var setToDelete = _context.Sets.Include(d => d.Questions).FirstOrDefault(set => set.SetId == questionSetId);
+
+            if (setToDelete != null)
+            {
+                var questionsToSets = setToDelete.Questions;
+                foreach (var item in questionsToSets)
+                {
+                    _context.Questions.Remove(item);
+                }
+                _context.Sets.Remove(setToDelete);
+            }
+
+            _context.SaveChanges();
+        }
+
+        internal void SaveQuestionSet (QuestionSetViewModel questionSet) {
+            var previousDatabaseSet = _context.Sets.Include (d => d.Questions).FirstOrDefault (set => set.SetId == questionSet.Id);
             var isNewQuestionSet = previousDatabaseSet == null;
 
-            var newSet = new QuestionSetMapper().GetSet(questionSet); // TODO inject...
-            if (isNewQuestionSet)
-            {
-                AddNewQuestionSet(newSet);
+            var newSet = new QuestionSetMapper ().GetSet (questionSet); // TODO inject...
+            if (isNewQuestionSet) {
+                AddNewQuestionSet (newSet);
                 return;
             }
 
-            var questionsToSave = newSet.Questions.Select(question => question.QuestionId).Where(d => d > 0);
-            var removeQuestions = _context.Questions.Where(q => q.FkSetId == questionSet.Id && !questionsToSave.Contains(q.QuestionId));
-            foreach (var item in removeQuestions)
-            {
-                _context.Questions.Remove(item);
+            var questionsToSave = newSet.Questions.Select (question => question.QuestionId).Where (d => d > 0);
+            var removeQuestions = _context.Questions.Where (q => q.FkSetId == questionSet.Id && !questionsToSave.Contains (q.QuestionId));
+            foreach (var item in removeQuestions) {
+                _context.Questions.Remove (item);
             }
 
             //set database properties....
             newSet.CreatedDate = previousDatabaseSet.CreatedDate;
             newSet.ModifiedDate = DateTime.Now;
-            foreach (var item in newSet.Questions)
-            {
+            foreach (var item in newSet.Questions) {
                 item.CreatedDate = DateTime.Now;
                 item.ModifiedDate = DateTime.Now;
                 item.FkSetId = newSet.SetId;
-                var previousQuestion = _context.Questions.FirstOrDefault(q => q.QuestionId == item.QuestionId);
-                if(previousQuestion == null)
-                {
-                      _context.Questions.Add(item);
+                var previousQuestion = _context.Questions.FirstOrDefault (q => q.QuestionId == item.QuestionId);
+                if (previousQuestion == null) {
+                    _context.Questions.Add (item);
+                } else {
+                    _context.Entry (previousQuestion).CurrentValues.SetValues (item);
                 }
-                else{
-                      _context.Entry(previousQuestion).CurrentValues.SetValues(item);
-                }
-              
-            }
-            _context.Entry(previousDatabaseSet).CurrentValues.SetValues(newSet);
 
-            _context.SaveChanges();
+            }
+            _context.Entry (previousDatabaseSet).CurrentValues.SetValues (newSet);
+
+            _context.SaveChanges ();
         }
 
-        private void AddNewQuestionSet(Sets newSet)
-        {
-            _context.Add(newSet);
-            _context.SaveChanges();
+        private void AddNewQuestionSet (Sets newSet) {
+            _context.Add (newSet);
+            _context.SaveChanges ();
         }
     }
 }

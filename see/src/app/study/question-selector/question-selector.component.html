@@ -1,6 +1,5 @@
 <mat-card class="question-card"  *ngFor="let set of questionSets; trackBy:set?.id"  (click)="selectSet(set)" >
     <mat-card-header>
-      <div mat-card-avatar class="set-image"><i class="material-icons">gesture</i></div>
       <mat-card-title class="set-heading">{{set.heading}}</mat-card-title>
         <mat-card-subtitle>
           {{ set.questions.length | i18nPlural: itemPluralMapping['question'] }}

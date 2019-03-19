@@ -1,10 +1,10 @@
 <div *ngIf="questionSet === null; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
-  <see-admin-question-selector [contextColour]="'warn'" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
-    class="question-viewer">
+  <see-admin-question-selector [contextColour]="'basic'" [questionSets]="questionSets" (selectQuestionSet)='onSelectQuestionSet($event)'
+  (deleteQuestionSet)='onDeleteQuestionSet($event)' class="question-viewer">
   </see-admin-question-selector>
   <div class="float-button-container">
-    <button mat-fab (click)="addNewQuestionSet()"><i class="material-icons">add</i></button>
+    <button mat-fab color="primary" (click)="addNewQuestionSet()"><i class="material-icons">add</i></button>
   </div>
 </ng-template>
 <ng-template #elseBlock>

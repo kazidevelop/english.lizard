@@ -28,13 +28,18 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
-    this.questionService.getQuestionSets()
-      .pipe(takeUntil(this.unsubscribe))
-      .subscribe(questionSets => {
-        this.questionSets = questionSets;
-      });
+    this.loadQuestionSets(false);
+   
   }
 
+  public loadQuestionSets(refresh: boolean)
+  {
+    this.questionService.getQuestionSets(refresh)
+    .pipe(takeUntil(this.unsubscribe))
+    .subscribe(questionSets => {
+      this.questionSets = questionSets;
+    });
+  }
   public ngOnDestroy() {
     this.unsubscribe.next();
     this.unsubscribe.complete();
@@ -42,7 +47,8 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public onCloseQuestionEditor(option: DialogPopupOptions) {
     if (option === DialogPopupOptions.Yes) {
-      this.questionService.saveQuestionSet(this.questionSet);
+      this.questionService.saveQuestionSet(this.questionSet)
+      .subscribe(() => this.loadQuestionSets(true));
       console.log('TODO: notify question has been saved successfully');
     }
     this.questionSet = null;
@@ -50,6 +56,11 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   public onSelectQuestionSet(set: QuestionSet) {
     this.questionSet = this.getQuestionSetClone(set);
+  }
+
+  public onDeleteQuestionSet(set: QuestionSet) {
+    this.questionService.deleteQuestionSet(set.id)
+    .subscribe(() => this.loadQuestionSets(true));
   }
 
 }

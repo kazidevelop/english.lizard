@@ -1,18 +1,14 @@
 <div class="admin-container">
-  <table border="0" style="width: 100%">
-    <tr>
-      <td style="width:8px;">
-        <div>
-          <button mat-icon-button (click)="close()">
-            <mat-icon>arrow_back</mat-icon>
-          </button>
-        </div>
-      </td>
-      <td>
-        <input matInput placeholder="heading" [(ngModel)]="questionSet.heading" />
-      </td>
-    </tr>
-  </table>
+  <button mat-raised-button class="see-button" (click)="cancel()">
+    <mat-icon>cancel</mat-icon>&nbsp;Cancel
+  </button> &nbsp;
+  <button mat-raised-button class="see-button" (click)="save()">
+    <mat-icon>save</mat-icon>&nbsp;Save Set
+  </button> &nbsp;
+  <br/> <br/>
+  <input matInput placeholder="heading" [(ngModel)]="questionSet.heading" />
+  <br/>
+  <hr />
   <button mat-raised-button class="see-button" (click)="delete()">
     <mat-icon>delete_outline</mat-icon>&nbsp;Delete
   </button> &nbsp;
