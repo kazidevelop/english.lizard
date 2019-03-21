@@ -9,7 +9,7 @@ import { Question } from '../../shared/question.model';
   templateUrl: './question-viewer.component.html',
   styleUrls: ['./question-viewer.component.scss']
 })
-export class QuestionViewerComponent implements OnInit, OnChanges {
+export class QuestionViewerComponent implements  OnChanges {
   @Input() questionSet: QuestionSet;
   @Output() closeQuestionViewer = new EventEmitter();
 
@@ -39,6 +39,9 @@ export class QuestionViewerComponent implements OnInit, OnChanges {
   }
 
   private isLastQuestion(): boolean {
+    if (this.numberOfQuestions === 1) {
+      return true;
+    }
     return this.numberOfQuestions - 1 === this.currentQuestionIndex;
   }
 
@@ -74,18 +77,17 @@ export class QuestionViewerComponent implements OnInit, OnChanges {
     this.barStyle = 'bar-unanswered';
     this.barButtonStyle = 'bar-button-unanswered';
     this.isLast = this.isLastQuestion();
+    this.selectedChoice =  null;
     this.question = this.questionSet.questions[this.currentQuestionIndex];
   }
 
   ngOnChanges() {
     if (this.questionSet && this.questionSet.questions) {
+      this.numberOfQuestions = this.questionSet.questions.length;
+      this.questionProgressJumps = 100 / this.numberOfQuestions;
       this.loadQuestion();
     }
 
   }
 
-  ngOnInit() {
-    this.numberOfQuestions = this.questionSet.questions.length;
-    this.questionProgressJumps = 100 / this.numberOfQuestions;
-  }
 }
