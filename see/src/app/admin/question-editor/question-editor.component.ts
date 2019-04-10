@@ -7,6 +7,8 @@ import { Question } from '../../shared/question.model';
 import { QuestionService } from '../../shared/question.service';
 import { MatDialog } from '@angular/material';
 import { DialogPopupOptions } from './dialog-data.model';
+import { Globals } from '../../shared/shared.globals.model';
+import { environment } from 'src/environments/environment.prod';
 
 
 /** @title Responsive sidenav */
@@ -47,6 +49,10 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     this.closeQuestionEditor.emit(DialogPopupOptions.No);
   }
 
+  
+  public isSpelling(text: string) {
+    return Globals.isSpelling(text);
+  }
 
   public save() {
     const dialogRef = this.dialog.open(DialogQuestionEditorComponent, {
@@ -65,24 +71,27 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
   private setQuestionSetAnswers() {
     // TODO move to function/class/service
     this.questionSet.questions.forEach(question => {
-      const choices: string[] = [];
-      if (question.choiceLines.length > 0) {
-        const trimmedValue = question.choiceLines.trim();
-        if (trimmedValue.length > 0) {
-          const aValues = trimmedValue.split('\n');
-          aValues.forEach(aValue => {
-            const trimmedAValue = aValue.trim();
-            if (trimmedAValue.length > 0) {
-              choices.push(trimmedAValue);
-            }
-          });
+
+      if(!Globals.isSpelling(question.text)){
+        const choices: string[] = [];
+        if (question.choiceLines.length > 0) {
+          const trimmedValue = question.choiceLines.trim();
+          if (trimmedValue.length > 0) {
+            const aValues = trimmedValue.split('\n');
+            aValues.forEach(aValue => {
+              const trimmedAValue = aValue.trim();
+              if (trimmedAValue.length > 0) {
+                choices.push(trimmedAValue);
+              }
+            });
+          }
+          if (choices.length > 0) {
+            question.answer = choices[0];
+          } else {
+            question.answer = '';
+          }
+          question.choices = choices;
         }
-        if (choices.length > 0) {
-          question.answer = choices[0];
-        } else {
-          question.answer = '';
-        }
-        question.choices = choices;
       }
     });
   }
@@ -93,6 +102,19 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     this.currentQuestionIndex = this.questionSet.questions.length;
     this.loadQuestionByIndex();
   }
+  public addSpeller() {
+    debugger;
+    const question: Question = this.questionService.getNewQuestion(this.questionSet.questions.length);
+    question.text = environment.spellingQuestionIdentifier;
+    question.choices[0] = 'word';
+    question.choices[1] = 'definition';
+    question.choices[2] = '';
+    debugger;
+    this.questionSet.questions.push(question);
+    this.currentQuestionIndex = this.questionSet.questions.length;
+    this.loadQuestionByIndex();
+  }
+
 
   public delete() {
     this.questionSet.questions.splice(this.currentQuestionIndex, 1);

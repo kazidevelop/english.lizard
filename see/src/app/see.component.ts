@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Question } from './shared/question.model';
 import { Title } from '@angular/platform-browser';
 import { MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'see-root',
@@ -18,8 +19,9 @@ export class SeeComponent implements OnInit, OnDestroy {
   private unsubscribe = new Subject();
   @ViewChild('drawer') public sidenav: MatSidenav;
 
-  constructor(private questionService: QuestionService, private titleService: Title) {
+  constructor(private questionService: QuestionService, private titleService: Title, private router: Router) {
   }
+
   public headerText = 'Study';
   public questionSet = null;
   public questionSets: QuestionSet[];
@@ -57,12 +59,13 @@ export class SeeComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit() {
+
+    this.router.navigate(['']);
+
     this.questionService.getQuestionSets()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
         this.questionSets = questionSets;
-        // XXXX dummy life,, why repeat in admin?
-       // this.questionSet = questionSets[0];
       });
   }
 

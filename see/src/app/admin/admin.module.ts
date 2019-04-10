@@ -7,7 +7,9 @@ import { QuestionEditorComponent } from './question-editor/question-editor.compo
 import { SharedModule } from '../shared/shared.module';
 import { DialogQuestionEditorComponent } from './question-editor/dialog-question-editor.component';
 import { DialogAdminComponent } from './dialog/admin-dialog.component';
-import { AdminQuestionSelectorComponent } from './question-selector/question-selector.component';
+import { AdminQuestionSelectorComponent } from './admin-question-selector/admin-question-selector.component';
+import { SeeQuestionChoiceComponent } from './question-editor/question-choice.component';
+import { SeeQuestionSpellingComponent } from './question-editor/question-spelling.component';
 
 @NgModule({
   imports: [
@@ -21,12 +23,15 @@ import { AdminQuestionSelectorComponent } from './question-selector/question-sel
     QuestionEditorComponent,
     DialogQuestionEditorComponent,
     DialogAdminComponent,
-    AdminQuestionSelectorComponent
+    AdminQuestionSelectorComponent,
+    SeeQuestionChoiceComponent,
+    SeeQuestionSpellingComponent
   ],
 
   entryComponents: [
     DialogQuestionEditorComponent,
-    DialogAdminComponent
+    DialogAdminComponent,
+    AdminQuestionSelectorComponent
   ],
 })
 export class AdminModule { }

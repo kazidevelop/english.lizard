@@ -1,17 +1,17 @@
-import { SeeMaterialModule } from './see-material.module';
+// import { SeeMaterialModule } from './see-material.module';
 
-describe('SeeMaterialModule', () => {
-  let seeMaterialModule: SeeMaterialModule;
+// describe('SeeMaterialModule', () => {
+//   let seeMaterialModule: SeeMaterialModule;
 
-  beforeEach(() => {
-    seeMaterialModule = new SeeMaterialModule();
-  });
+//   beforeEach(() => {
+//     seeMaterialModule = new SeeMaterialModule();
+//   });
 
-  it('should create an instance', () => {
-    expect(seeMaterialModule).toBeTruthy();
-  });
-});
+//   it('should create an instance', () => {
+//     expect(seeMaterialModule).toBeTruthy();
+//   });
+// });
 
 
-// test data
+// // test data
 

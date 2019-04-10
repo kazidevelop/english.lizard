@@ -29,12 +29,9 @@ export class StudyComponent implements OnInit, OnDestroy {
     return inputArray;
   }
 
-  public getQuestionSet(heading: string): QuestionSet {
-    const item = this.questionSets.filter((d) => {
-      return d.heading === heading;
-    })[0];
-    item.questions = this.shuffleQuestions(item.questions);
-    return item;
+  public reOrderQuestionsAndAnswers(rawSet: QuestionSet): QuestionSet {
+     rawSet.questions = this.shuffleQuestions(rawSet.questions);
+     return rawSet;
   }
 
   private shuffleQuestions(questions: Question[]): Question[] {
@@ -49,7 +46,7 @@ export class StudyComponent implements OnInit, OnDestroy {
     this.questionService.getQuestionSets()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
-        this.questionSets = questionSets;
+        this.questionSets =  questionSets;
        });
   }
 
@@ -63,7 +60,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   }
 
   public onSelectQuestionSet(set: QuestionSet) {
-    this.questionSet = set;
+    this.questionSet = this.reOrderQuestionsAndAnswers(set);
   }
 
 }

@@ -23,17 +23,16 @@ export class AdminComponent implements OnInit, OnDestroy {
   }
 
   public getQuestionSetClone(set: QuestionSet): QuestionSet {
-    const clone = (JSON.parse(JSON.stringify(set)));
+    const clone: QuestionSet = (JSON.parse(JSON.stringify(set)));
     return clone;
   }
 
   public ngOnInit() {
     this.loadQuestionSets(false);
-   
+
   }
 
-  public loadQuestionSets(refresh: boolean)
-  {
+  public loadQuestionSets(refresh: boolean) {
     this.questionService.getQuestionSets(refresh)
     .pipe(takeUntil(this.unsubscribe))
     .subscribe(questionSets => {

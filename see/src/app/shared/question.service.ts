@@ -20,12 +20,12 @@ export class QuestionService {
 
   constructor(private httpClient: HttpClient) { }
 
- 
+
 
   public saveQuestionSet (questionSet: QuestionSet): Observable<QuestionSet> {
     return this.httpClient.post<QuestionSet>(this.questionSetUrl, questionSet)
       .pipe(
-        catchError(this.handleError) //('saveQuestionSet', questionSet)
+        catchError(this.handleError) // ('saveQuestionSet', questionSet)
       );
   }
 
@@ -33,10 +33,10 @@ export class QuestionService {
 
   /** DELETE: delete the question set from the server */
   public deleteQuestionSet (id: number): Observable<{}> {
-  const url =`${this.questionSetUrl}/${id}`; // DELETE api/heroes/42
+  const url = `${this.questionSetUrl}/${id}`; // DELETE api/heroes/42
   return this.httpClient.delete(url)
     .pipe(
-      catchError(this.handleError) //('deleteQuestionSet')
+      catchError(this.handleError) // ('deleteQuestionSet')
     );
 }
 
@@ -54,7 +54,7 @@ private handleError(error: HttpErrorResponse ) {
   // return an observable with a user-facing error message
   return throwError(
     'Something bad happened; please try again later.');
-};
+}
 
   // public deleteQuestionSet(questionSetId: Number): any {
   //   this.httpClient.delete<QuestionSet>(`${this.apiUrl}questionSets`, questionSetId).subscribe();
@@ -69,10 +69,10 @@ private handleError(error: HttpErrorResponse ) {
     const newCount = count + 1;
     const question: Question = {
       id: 0,
-      text: 'new question ' + newCount,
+      text: `new question ${newCount}`,
       answer: 'choice1',
       choices: ['choice1', 'choice2', 'choice3', 'choice4'],
-      choiceLines: 'choice1\r\nchoice2\r\nchoice3\r\nchoice4' // tooltip?
+      choiceLines: 'choice1\r\nchoice2\r\nchoice3\r\nchoice4', // tooltip?
     };
     return question;
   }

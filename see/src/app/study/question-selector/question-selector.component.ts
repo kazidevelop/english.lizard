@@ -27,4 +27,8 @@ export class QuestionSelectorComponent {
   }
 
 
+  public trackByFn(index: number, set: QuestionSet): number {
+    return set.id;
+  }
+
 }

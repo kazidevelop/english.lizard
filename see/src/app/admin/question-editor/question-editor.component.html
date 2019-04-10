@@ -9,23 +9,31 @@
   <input matInput placeholder="heading" [(ngModel)]="questionSet.heading" />
   <br/>
   <hr />
-  <button mat-raised-button class="see-button" (click)="delete()">
-    <mat-icon>delete_outline</mat-icon>&nbsp;Delete
+  <button mat-icon-button class="see-button" (click)="delete()">
+    <mat-icon>delete_outline</mat-icon>&nbsp;
   </button> &nbsp;
   <button mat-raised-button class="see-button" (click)="add()">
-    <mat-icon>add_circle_outline</mat-icon>&nbsp;Add
+    <mat-icon>add_circle_outline</mat-icon>&nbsp;Choice
   </button> &nbsp;
-  <button mat-raised-button class="see-button" (click)="previous()">
-    <mat-icon>arrow_left</mat-icon>&nbsp;Previous
+  <button mat-raised-button class="see-button" (click)="addSpeller()">
+    <mat-icon>add_circle_outline</mat-icon>&nbsp;Speller
   </button> &nbsp;
-  <button mat-raised-button class="see-button" (click)="next()">
-    Next&nbsp;<mat-icon>arrow_right</mat-icon>
+  <button mat-icon-button class="see-button" (click)="previous()">
+    <mat-icon>arrow_left</mat-icon>&nbsp;
+  </button> &nbsp;
+  <button mat-icon-button class="see-button" (click)="next()">
+    &nbsp;<mat-icon>arrow_right</mat-icon>
   </button>
   <h3>Question #: {{currentQuestionIndex+1}}/{{questionSet.questions.length}}</h3>
-  <mat-form-field class="text-input">
-    <textarea matInput placeholder="question" [(ngModel)]="question.text"></textarea>
-  </mat-form-field>
-  <mat-form-field class="text-input">
-    <textarea matInput placeholder="choices - right answer is the first one in the list" [(ngModel)]="question.choiceLines"></textarea>
-  </mat-form-field>
+<ng-container
+  *ngIf="isSpelling(question.text); then loggedIn; else loggedOut">
+</ng-container>
+
+<ng-template #loggedIn>
+    <see-question-spelling [question]="question"></see-question-spelling>
+</ng-template>
+<ng-template #loggedOut>
+    <see-question-choice  [question]="question" ></see-question-choice>
+</ng-template>
+
 </div>

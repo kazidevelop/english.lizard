@@ -1,4 +1,4 @@
-<mat-card class="question-card"  *ngFor="let set of questionSets; trackBy:set?.id"  (click)="selectSet(set)" >
+<mat-card class="question-card"  *ngFor="let set of questionSets; index as i; trackBy: trackByFn"  (click)="selectSet(set)" >
     <mat-card-header>
       <mat-card-title class="set-heading">{{set.heading}}</mat-card-title>
         <mat-card-subtitle>
