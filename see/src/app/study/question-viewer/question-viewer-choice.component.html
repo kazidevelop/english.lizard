@@ -1,0 +1,10 @@
+<h2 class="question-set">{{question.text}}</h2>
+<mat-card *ngIf="question !== undefined && question !== null">
+  <mat-card-content>
+    <mat-radio-group #choice  class="question-radio-group" [(ngModel)]="selectedChoice" (change)="choiceChanged()">
+      <mat-radio-button class="question-radio-button"  *ngFor="let choice of question.choices" [value]="choice">
+        {{choice}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card-content>
+</mat-card>

@@ -18,31 +18,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   public questionSet = null;
   public questionSets: QuestionSet[];
 
-  // Fisher–Yates shuffle
-  private doFisherYatesShuffle(inputArray: any[]): any[] {
-    for (let i: number = inputArray.length - 1; i >= 0; i--) {
-      const randomIndex: number = Math.floor(Math.random() * (i + 1));
-      const itemAtIndex: number = inputArray[randomIndex];
-      inputArray[randomIndex] = inputArray[i];
-      inputArray[i] = itemAtIndex;
-    }
-    return inputArray;
-  }
-
-  public reOrderQuestionsAndAnswers(rawSet: QuestionSet): QuestionSet {
-     rawSet.questions = this.shuffleQuestions(rawSet.questions);
-     return rawSet;
-  }
-
-  private shuffleQuestions(questions: Question[]): Question[] {
-    questions.forEach(question => {
-      question.choices = this.doFisherYatesShuffle(question.choices);
-    });
-    return this.doFisherYatesShuffle(questions);
-  }
-
-
-  public ngOnInit() {
+   public ngOnInit() {
     this.questionService.getQuestionSets()
       .pipe(takeUntil(this.unsubscribe))
       .subscribe(questionSets => {
@@ -60,7 +36,7 @@ export class StudyComponent implements OnInit, OnDestroy {
   }
 
   public onSelectQuestionSet(set: QuestionSet) {
-    this.questionSet = this.reOrderQuestionsAndAnswers(set);
+    this.questionSet = this.questionService.reOrderQuestionsAndAnswers(set);
   }
 
 }

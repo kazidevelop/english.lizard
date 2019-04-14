@@ -26,13 +26,13 @@
   </button>
   <h3>Question #: {{currentQuestionIndex+1}}/{{questionSet.questions.length}}</h3>
 <ng-container
-  *ngIf="isSpelling(question.text); then loggedIn; else loggedOut">
+  *ngIf="isSpelling(question.text); then spelling; else choice">
 </ng-container>
 
-<ng-template #loggedIn>
+<ng-template #spelling>
     <see-question-spelling [question]="question"></see-question-spelling>
 </ng-template>
-<ng-template #loggedOut>
+<ng-template #choice>
     <see-question-choice  [question]="question" ></see-question-choice>
 </ng-template>
 

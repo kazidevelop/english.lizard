@@ -1,0 +1,12 @@
+<mat-card class="question-card"  *ngFor="let questionSet of questionSets; index as i; trackBy: trackByFn"  (click)="selectSet(questionSet)" >
+    <mat-card-header>
+        <mat-card-title class="set-heading">{{questionSet.heading}}</mat-card-title>
+        <mat-card-subtitle>
+          {{ questionSet.questions.length | i18nPlural: itemPluralMapping['question'] }}
+        </mat-card-subtitle>
+     </mat-card-header>
+    <mat-card-content>
+        <button mat-raised-button class="see-button"  (click)="deleteSet($event, questionSet)"><mat-icon>delete</mat-icon>&nbsp;Delete</button>
+    </mat-card-content>
+</mat-card>
+  

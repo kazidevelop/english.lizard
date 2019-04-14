@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { tap, map  , catchError} from 'rxjs/operators';
 import { Question } from './question.model';
 import {throwError } from 'rxjs';
+import { Globals } from './shared.globals.model';
 
 
 @Injectable({
@@ -20,7 +21,42 @@ export class QuestionService {
 
   constructor(private httpClient: HttpClient) { }
 
+   // Fisher–Yates shuffle
+   private doFisherYatesShuffle(inputArray: any[]): any[] {
+    for (let i: number = inputArray.length - 1; i >= 0; i--) {
+      const randomIndex: number = Math.floor(Math.random() * (i + 1));
+      const itemAtIndex: number = inputArray[randomIndex];
+      inputArray[randomIndex] = inputArray[i];
+      inputArray[i] = itemAtIndex;
+    }
+    return inputArray;
+  }
 
+  public reOrderQuestionsAndAnswers(rawSet: QuestionSet): QuestionSet {
+     rawSet.questions = this.shuffleQuestions(rawSet.questions);
+     return rawSet;
+  }
+
+  private shuffleQuestions(questions: Question[]): Question[] {
+    questions.forEach(question => {
+         if ( !Globals.isSpelling(question.text)) { // TODO... move out???
+          question.choices = this.doFisherYatesShuffle(question.choices);
+         }
+    });
+    return this.doFisherYatesShuffle(questions);
+  }
+
+
+  public isCorrect(question: Question, selectedChoice: string): boolean {
+    if (Globals.isSpelling(question.text)) {
+      if (selectedChoice) {
+        const formattedSelectedChoice = selectedChoice.trim().toLowerCase();
+        return formattedSelectedChoice === question.answer.toLowerCase();
+      }
+      return false;
+    }
+    return selectedChoice === question.answer;
+  }
 
   public saveQuestionSet (questionSet: QuestionSet): Observable<QuestionSet> {
     return this.httpClient.post<QuestionSet>(this.questionSetUrl, questionSet)

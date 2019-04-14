@@ -1,21 +1,17 @@
 <div class="question-viewer-content" *ngIf="state!== 'finished'">
   <mat-progress-bar *ngIf="state !== 'finished'" mode="determinate" [value]="questionProgress"></mat-progress-bar>
-  <h2 class="question-set">{{question.text}}</h2>
-  <mat-card *ngIf="question !== undefined && question !== null">
-    <mat-card-content>
-      <mat-radio-group [required]="false" *ngIf="state !== 'checked'" class="question-radio-group" [(ngModel)]="selectedChoice">
-        <mat-radio-button class="question-radio-button" (click)="selectChoice()" *ngFor="let choice of question.choices" [value]="choice">
-          {{choice}}
-        </mat-radio-button>
-      </mat-radio-group>
-      <mat-radio-group *ngIf="state === 'checked'" disabled="true" class="question-radio-group" [(ngModel)]="selectedChoice">
-        <mat-radio-button class="question-radio-button" *ngFor="let choice of question.choices" [value]="choice">
-          {{choice}}
-        </mat-radio-button>
-      </mat-radio-group>
 
-    </mat-card-content>
-  </mat-card>
+  <ng-container *ngIf="isSpelling(question.text); then spelling; else choice">
+    [selectedChoice]="selectedChoice" 
+  </ng-container>
+
+  <ng-template #spelling>
+    <see-question-viewer-spelling [question]="question" (answered)="onQuestionAnswered($event)"></see-question-viewer-spelling>
+  </ng-template>
+  <ng-template #choice>
+      <see-question-viewer-choice [question]="question" (answered)="onQuestionAnswered($event)" ></see-question-viewer-choice>
+    </ng-template>
+
   <mat-card class="question-result-pane" [ngClass]="barStyle">
     <mat-card-content>
       <div [ngSwitch]="state">
@@ -27,7 +23,8 @@
             <button mat-raised-button [ngClass]="barButtonStyle" mat-raised-button (click)="finish()">Finish</button>
           </ng-template>
           <ng-template #nextBlock>
-            <button mat-raised-button [ngClass]="barButtonStyle" mat-raised-button (click)="loadQuestion()">Next</button>
+            <button mat-raised-button [ngClass]="barButtonStyle" mat-raised-button
+              (click)="loadQuestion()">Next</button>
           </ng-template>
           &nbsp;&nbsp;
           <ng-container *ngIf="isCorrect; then thenBlock else elseBlock"></ng-container>
@@ -45,7 +42,8 @@
 <div class="question-viewer-content" *ngIf="state === 'finished'">
   <mat-card class="question-result-pane">
     <mat-card-content>
-      <see-question-finish [correct]="correct" [numberOfQuestions]="numberOfQuestions" [questionSetHeading]="questionSet.heading">
+      <see-question-finish [correct]="correct" [numberOfQuestions]="numberOfQuestions"
+        [questionSetHeading]="questionSet.heading">
       </see-question-finish>
       <div class="question-result-pane-buttons">
         <button mat-raised-button class="bar-button-correct" (click)="close()">Close</button>

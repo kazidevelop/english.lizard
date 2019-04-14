@@ -1,0 +1,79 @@
+
+ export class exampleDef {
+  'word': 'anagram';
+  'phonetic': '/ˈænəˌɡræm/';
+  'pronunciation': 'https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/anagram_us_1.mp3';
+  'meaning': {
+      'noun': [
+          {
+              'definition': 'A word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.',
+              'synonyms': [
+                  'riddle',
+                  'puzzle',
+                  'word game'
+              ]
+          }
+      ]
+  };
+}
+
+// {
+//     "word": "hello",
+//     "phonetic": [
+//       "həˈləʊ",
+//       "hɛˈləʊ"
+//     ],
+//     "meaning": {
+//       "exclamation": [
+//         {
+//           "definition": "used as a greeting or to begin a telephone conversation.",
+//           "example": "hello there, Katie!"
+//         }
+//       ],
+
+
+
+
+
+
+
+
+// An observable which is similar to .of
+// However it takes an array or an array like object as an argument
+
+Rx.Observable.from([
+    {
+        "word": "anagram",
+        "phonetic": "/ˈænəˌɡræm/",
+        "pronunciation": "https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/anagram_us_1.mp3",
+        "meaning": {
+            "noun": [
+                {
+                    "definition": "A word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.",
+                    "synonyms": [
+                        "riddle",
+                        "puzzle",
+                        "word game"
+                    ]
+                }
+            ]
+        }
+    }
+]).map(data =>
+       {
+    var obj = {};
+	//obj['word'] = data.word;
+    //obj['pronunciation'] = data.pronunciation;
+    var type = Object.keys(data.meaning)[0];
+    obj['meaning'] = data.meaning[type][0].definition + ' (' + type + ')';
+    //obj['meaning'] = data.meaning['noun'].definition;
+	return obj;
+}
+      ).subscribe(
+  val => console.log(JSON.stringify(val)));
+
+
+//.map((res: Response) => res.json().map(obj => new MyObject(obj.id, obj.name)))
+
+
+https://rxjs-playground.github.io/#/?js=%0A%0A%2F%2F%20An%20observable%20which%20is%20similar%20to%20.of%0A%2F%2F%20However%20it%20takes%20an%20array%20or%20an%20array%20like%20object%20as%20an%20argument%0A%0ARx.Observable.from%28%5B%0A%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%22word%22%3A%20%22anagram%22%2C%0A%20%20%20%20%20%20%20%20%22phonetic%22%3A%20%22%2F%CB%88%C3%A6n%C9%99%CB%8C%C9%A1r%C3%A6m%2F%22%2C%0A%20%20%20%20%20%20%20%20%22pronunciation%22%3A%20%22https%3A%2F%2Fs3.amazonaws.com%2Faudio.oxforddictionaries.com%2Fen%2Fmp3%2Fanagram_us_1.mp3%22%2C%0A%20%20%20%20%20%20%20%20%22meaning%22%3A%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%22noun%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22definition%22%3A%20%22A%20word%2C%20phrase%2C%20or%20name%20formed%20by%20rearranging%20the%20letters%20of%20another%2C%20such%20as%20cinema%2C%20formed%20from%20iceman.%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22synonyms%22%3A%20%5B%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22riddle%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22puzzle%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22word%20game%22%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20%5D%0A%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%5D%29.map%28data%20%3D%3E%0A%20%20%20%20%20%20%20%7B%0A%20%20%20%20var%20obj%20%3D%20%7B%7D%3B%0A%09%2F%2Fobj%5B%27word%27%5D%20%3D%20data.word%3B%0A%20%20%20%20%2F%2Fobj%5B%27pronunciation%27%5D%20%3D%20data.pronunciation%3B%0A%20%20%20%20var%20type%20%3D%20Object.keys%28data.meaning%29%5B0%5D%3B%0A%20%20%20%20obj%5B%27meaning%27%5D%20%3D%20data.meaning%5Btype%5D%5B0%5D.definition%20%2B%20%27%20%28%27%20%2B%20type%20%2B%20%27%29%27%3B%0A%20%20%20%20%2F%2Fobj%5B%27meaning%27%5D%20%3D%20data.meaning%5B%27noun%27%5D.definition%3B%0A%09return%20obj%3B%0A%7D%0A%20%20%20%20%20%20%29.subscribe%28%0A%20%20val%20%3D%3E%20console.log%28JSON.stringify%28val%29%29%29%3B%0A%0A%0A%2F%2F.map%28%28res%3A%20Response%29%20%3D%3E%20res.json%28%29.map%28obj%20%3D%3E%20new%20MyObject%28obj.id%2C%20obj.name%29%29%29%0A%0A%0A

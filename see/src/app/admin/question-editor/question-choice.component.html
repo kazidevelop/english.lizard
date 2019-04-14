@@ -1,0 +1,8 @@
+
+  <mat-form-field class="text-input">
+    <textarea matInput placeholder="question" [(ngModel)]="question.text"></textarea>
+  </mat-form-field>
+  <mat-form-field class="text-input">
+    <textarea matInput placeholder="choices - right answer is the first one in the list" [(ngModel)]="question.choiceLines"></textarea>
+  </mat-form-field>
+  {{question}}

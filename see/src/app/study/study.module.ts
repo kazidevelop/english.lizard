@@ -8,13 +8,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { QuestionSelectorComponent } from './question-selector/question-selector.component';
+import { QuestionViewerChoiceComponent } from './question-viewer/question-viewer-choice.component';
+import { QuestionViewerSpellingComponent } from './question-viewer/question-viewer-spelling.component';
 
 @NgModule({
   declarations: [
     StudyComponent,
     QuestionViewerComponent,
     QuestionFinishComponent,
-    QuestionSelectorComponent
+    QuestionSelectorComponent,
+    QuestionViewerChoiceComponent,
+    QuestionViewerSpellingComponent
   ],
   imports: [
     CommonModule,

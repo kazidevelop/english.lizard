@@ -49,7 +49,6 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     this.closeQuestionEditor.emit(DialogPopupOptions.No);
   }
 
-  
   public isSpelling(text: string) {
     return Globals.isSpelling(text);
   }
@@ -72,7 +71,7 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     // TODO move to function/class/service
     this.questionSet.questions.forEach(question => {
 
-      if(!Globals.isSpelling(question.text)){
+      if (!Globals.isSpelling(question.text)) {
         const choices: string[] = [];
         if (question.choiceLines.length > 0) {
           const trimmedValue = question.choiceLines.trim();
@@ -103,13 +102,11 @@ export class QuestionEditorComponent implements OnChanges, OnInit {
     this.loadQuestionByIndex();
   }
   public addSpeller() {
-    debugger;
     const question: Question = this.questionService.getNewQuestion(this.questionSet.questions.length);
     question.text = environment.spellingQuestionIdentifier;
     question.choices[0] = 'word';
     question.choices[1] = 'definition';
     question.choices[2] = '';
-    debugger;
     this.questionSet.questions.push(question);
     this.currentQuestionIndex = this.questionSet.questions.length;
     this.loadQuestionByIndex();

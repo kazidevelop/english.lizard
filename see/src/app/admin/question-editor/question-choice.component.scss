@@ -1,0 +1,30 @@
+.admin-container {
+    // position: absolute;
+    flex-grow: 1;
+    top: 0px;
+    left: 0px;
+    width: 98%;
+    margin: 2px;
+  }
+  
+  
+  textarea {
+    width: 98%;
+    height: 150px;
+  }
+  
+  .question-viewer-content {
+    margin-left: 10% !important;
+    margin-right: 10% !important;
+  }
+  
+  
+  .see-button {
+    line-height: 1.0em;
+    padding-left: 2px;
+  }
+  
+  .text-input {
+    width: 100%;
+  }
+  
