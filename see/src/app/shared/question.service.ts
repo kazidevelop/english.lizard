@@ -92,13 +92,9 @@ private handleError(error: HttpErrorResponse ) {
     'Something bad happened; please try again later.');
 }
 
-  // public deleteQuestionSet(questionSetId: Number): any {
-  //   this.httpClient.delete<QuestionSet>(`${this.apiUrl}questionSets`, questionSetId).subscribe();
-  // }
-
   public getNewQuestionSet(): QuestionSet {
     const questionSetCount = this.loadedSets.length + 1;
-    return { id: 0 , heading: 'new question set ' + questionSetCount, questions: [this.getNewQuestion(0)] };
+    return { id: 0 , heading: `new question set ${questionSetCount}`, questions: [this.getNewQuestion(0)] };
   }
 
   public getNewQuestion(count: number): Question {
@@ -112,7 +108,6 @@ private handleError(error: HttpErrorResponse ) {
     };
     return question;
   }
-
 
   public getQuestionSets(refresh: boolean = false ): Observable<QuestionSet[]> {
 

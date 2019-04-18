@@ -32,112 +32,113 @@ describe('See-Dictionary testing', () => {
     const expectedDefinition: SeeDefinition = {
       word: 'concern',
       pronunciation: 'https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/xconcern_us_1.mp3',
-      meaning: "Relate to; be about.", type: 'verb', example: "the story concerns a friend of mine"
+      meaning: 'Relate to; be about.', type: 'verb', example: 'the story concerns a friend of mine',
+      synonyms: ''
     };
 
     const testData = [
       {
         word: expectedDefinition.word,
-        "phonetic": "/kənˈsərn/",
-        "pronunciation": expectedDefinition.pronunciation,
-        "meaning": {
-          "verb": [
+        'phonetic': '/kənˈsərn/',
+        'pronunciation': expectedDefinition.pronunciation,
+        'meaning': {
+          'verb': [
             {
-              "definition": expectedDefinition.meaning,
-              "example": expectedDefinition.example,
-              "synonyms": [
-                "be about",
-                "deal with",
-                "cover",
-                "treat",
-                "have to do with"
+              'definition': expectedDefinition.meaning,
+              'example': expectedDefinition.example,
+              'synonyms': [
+                'be about',
+                'deal with',
+                'cover',
+                'treat',
+                'have to do with'
               ]
             },
             {
-              "definition": "Worry (someone); make anxious.",
-              "example": "the roof of the barn concerns me because eventually it will fall in",
-              "synonyms": [
-                "worry",
-                "disturb",
-                "trouble",
-                "bother",
-                "perturb",
-                "unsettle",
-                "make anxious",
-                "distress",
-                "upset",
-                "agitate",
-                "cause disquiet to",
-                "disquiet"
+              'definition': 'Worry (someone); make anxious.',
+              'example': 'the roof of the barn concerns me because eventually it will fall in',
+              'synonyms': [
+                'worry',
+                'disturb',
+                'trouble',
+                'bother',
+                'perturb',
+                'unsettle',
+                'make anxious',
+                'distress',
+                'upset',
+                'agitate',
+                'cause disquiet to',
+                'disquiet'
               ]
             }
           ],
-          "noun": [
+          'noun': [
             {
-              "definition": "Anxiety; worry.",
-              "example": "such unsatisfactory work gives cause for concern",
-              "synonyms": [
-                "anxiety",
-                "worry",
-                "disquiet",
-                "disquietude",
-                "apprehension",
-                "apprehensiveness",
-                "unease",
-                "uneasiness",
-                "perturbation",
-                "consternation",
-                "distress",
-                "agitation"
+              'definition': 'Anxiety; worry.',
+              'example': 'such unsatisfactory work gives cause for concern',
+              'synonyms': [
+                'anxiety',
+                'worry',
+                'disquiet',
+                'disquietude',
+                'apprehension',
+                'apprehensiveness',
+                'unease',
+                'uneasiness',
+                'perturbation',
+                'consternation',
+                'distress',
+                'agitation'
               ]
             },
             {
-              "definition": "A matter of interest or importance to someone.",
-              "example": "oil reserves are the concern of the Energy Department",
-              "synonyms": [
-                "responsibility",
-                "business",
-                "affair",
-                "charge",
-                "duty",
-                "job",
-                "task",
-                "occupation"
+              'definition': 'A matter of interest or importance to someone.',
+              'example': 'oil reserves are the concern of the Energy Department',
+              'synonyms': [
+                'responsibility',
+                'business',
+                'affair',
+                'charge',
+                'duty',
+                'job',
+                'task',
+                'occupation'
               ]
             },
             {
-              "definition": "A business; a firm.",
-              "example": "a small, debt-ridden concern",
-              "synonyms": [
-                "company",
-                "business",
-                "firm",
-                "enterprise",
-                "venture",
-                "organization",
-                "operation",
-                "undertaking",
-                "industry",
-                "corporation",
-                "establishment",
-                "house",
-                "shop",
-                "office",
-                "bureau",
-                "agency",
-                "franchise",
-                "practice",
-                "partnership",
-                "consortium",
-                "cooperative",
-                "conglomerate",
-                "group",
-                "combine",
-                "syndicate"
+              'definition': 'A business; a firm.',
+              'example': 'a small, debt-ridden concern',
+              'synonyms': [
+                'company',
+                'business',
+                'firm',
+                'enterprise',
+                'venture',
+                'organization',
+                'operation',
+                'undertaking',
+                'industry',
+                'corporation',
+                'establishment',
+                'house',
+                'shop',
+                'office',
+                'bureau',
+                'agency',
+                'franchise',
+                'practice',
+                'partnership',
+                'consortium',
+                'cooperative',
+                'conglomerate',
+                'group',
+                'combine',
+                'syndicate'
               ]
             },
             {
-              "definition": "A complicated or awkward object or structure."
+              'definition': 'A complicated or awkward object or structure.'
             }
           ]
         }
@@ -153,7 +154,8 @@ describe('See-Dictionary testing', () => {
     const expectedDefinition: SeeDefinition = {
       word: 'anagram',
       pronunciation: 'https://s3.amazonaws.com/audio.oxforddictionaries.com/en/mp3/anagram_us_1.mp3',
-      meaning: 'A word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.', type: 'noun', example: ''
+      meaning: 'A word, phrase, or name formed by rearranging the letters of another, such as cinema, formed from iceman.', type: 'noun', example: '',
+      synonyms: ''
     };
 
     const testData = [{
@@ -177,15 +179,15 @@ describe('See-Dictionary testing', () => {
   });
 
 
-  function runTest(testData: any, dictionaryService: SeeDictionaryService, expectedDefinition: SeeDefinition, httpTestingController: HttpTestingController) {
+  function runTest(testData: any, localDictionaryService: SeeDictionaryService, expectedDefinition: SeeDefinition, localHttpTestingController: HttpTestingController) {
     const testUrlWithWord = `${environment.dictionaryUrlPreix}${testData[0].word}${environment.dictionaryUrlSuffix}`;
-    dictionaryService.lookup(expectedDefinition.word).subscribe(data =>
+    localDictionaryService.lookup(expectedDefinition.word).subscribe(data =>
       // When observable resolves, result should match test data
       expect(data).toEqual(expectedDefinition));
     // The following `expectOne()` will match the request's URL.
     // If no requests or multiple requests matched that URL
     // `expectOne()` would throw.
-    const req = httpTestingController.expectOne(testUrlWithWord);
+    const req = localHttpTestingController.expectOne(testUrlWithWord);
     //  // Assert that the request is a GET.
     expect(req.request.method).toEqual('GET');
     expect(req.request.responseType).toEqual('json');
@@ -193,6 +195,6 @@ describe('See-Dictionary testing', () => {
     // Subscribe callback asserts that correct data was returned.
     req.flush(testData);
     // Finally, assert that there are no outstanding requests.
-    httpTestingController.verify();
+    localHttpTestingController.verify();
   }
 });

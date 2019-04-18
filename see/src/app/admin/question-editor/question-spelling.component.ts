@@ -25,10 +25,17 @@ export class SeeQuestionSpellingComponent implements OnChanges {
   public lookup() {
     this.dictionary.lookup(this.question.choices[0])
       .subscribe(result  => {
+
+        this.question.choices.forEach(element => {
+          element = '';
+        });
         let definition =  `${result.meaning} (${result.type})`;
 
         if ( result.example  && result.example.length > 0 ) {
           definition += `, example:  (${result.example})`;
+        }
+        if ( result.synonyms  && result.synonyms.length > 0 ) {
+          definition += `, synonyms:  (${result.synonyms})`;
         }
         this.question.choices[1] = definition;
         this.question.choices[2] = result.pronunciation;

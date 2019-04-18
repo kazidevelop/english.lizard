@@ -22,40 +22,37 @@ export class SeeDictionaryService {
       .pipe(
         map(dataList => {
           const data = dataList[0];
-          const obj: SeeDefinition = { word: '', pronunciation: '', meaning: '', type: '', example: '' };
+          const obj: SeeDefinition = { word: '', pronunciation: '', meaning: '', type: '', example: '', synonyms: '' };
           obj.word = data.word;
           obj.pronunciation = data.pronunciation;
           obj.type = this.getFirstWordType(data.meaning);
           const definition = data.meaning[obj.type][0];
-          obj.meaning = definition.definition;
-          obj.example = this.getValueOrEmptyString(definition.example);
+          obj.meaning = this.getBlankedOutValue(data.word, definition.definition);
+          obj.example = this.getBlankedOutValue(data.word, definition.example);
+          obj.synonyms = this.getBlankedOutValue(data.word, definition.synonyms.join(', '));
           return obj;
         }
         ),
         catchError(this.handleError)
       );
   }
-  
-  private  getFirstWordType(obj: any) : string{
-    for (let prop in obj){
+
+  private getBlankedOutValue(word: string, item: string) {
+    if (!item) {
+      return '';
+    }
+    return item.split(word).join( '___');
+  }
+
+  private  getFirstWordType(obj: any): string {
+    for (const prop in obj) {
         if (obj.hasOwnProperty(prop)) {
           return prop;
         }
     }
-    return "";
+    return '';
   }
 
-  private  getValueOrEmptyString(obj: any) : string
-  {
-    if(obj)
-    {
-      return obj;
-    }
-    else
-    {
-      return '';
-    }
-  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

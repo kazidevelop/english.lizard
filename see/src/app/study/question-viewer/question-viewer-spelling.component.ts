@@ -16,10 +16,9 @@ export class QuestionViewerSpellingComponent implements OnChanges {
 
   ngOnChanges() {
     this.selectedChoice = '';
-    if( this.audioPlayerRef.nativeElement){
+    if ( this.audioPlayerRef  && this.audioPlayerRef.nativeElement) {
       this.audioPlayerRef.nativeElement.src =  this.question.choices[2];
     }
-   
   }
 
   public textInputChanged() { // TODO ... delays... wait...

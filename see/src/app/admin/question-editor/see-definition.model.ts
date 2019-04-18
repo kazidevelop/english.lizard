@@ -5,4 +5,5 @@ export default interface SeeDefinition {
     meaning: string;
     type: string;
     example: string;
+    synonyms: string;
  }
